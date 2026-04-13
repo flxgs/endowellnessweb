@@ -2,7 +2,7 @@ import { after } from "next/server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-export const maxDuration = 60;
+export const maxDuration = 180;
 
 type TelegramUpdate = {
   update_id: number;
@@ -50,11 +50,19 @@ type BotConfig = {
   openaiModel: string;
   github: GitHubConfig;
   allowDirectMainPush: boolean;
+  allowlistPath: string;
+};
+
+type AllowlistState = {
+  ids: Set<string>;
+  sha: string | null;
 };
 
 const MAX_SNAPSHOT_CHARS = 140_000;
 const MAX_SNAPSHOT_FILES = 45;
 const MAX_FILE_SIZE_BYTES = 20_000;
+const HTTP_TIMEOUT_MS = 20_000;
+const OPENAI_TIMEOUT_MS = 45_000;
 
 const SKIP_EXTENSIONS = new Set([
   ".png",
@@ -87,6 +95,7 @@ function getBotConfig(): BotConfig {
   const openaiModel = getEnv("OPENAI_MODEL", false) || "gpt-5.3-codex";
   const telegramWebhookSecret = getEnv("TELEGRAM_WEBHOOK_SECRET", false) || null;
   const allowDirectMainPush = getEnv("WEB_BOT_ENABLE_DIRECT_MAIN_PUSH", false) === "true";
+  const allowlistPath = getEnv("GITHUB_ALLOWLIST_PATH", false) || ".bot/allowlist.json";
 
   const githubToken = getEnv("GITHUB_TOKEN");
   const githubOwner = getEnv("GITHUB_REPO_OWNER");
@@ -111,6 +120,7 @@ function getBotConfig(): BotConfig {
     openaiApiKey,
     openaiModel,
     allowDirectMainPush,
+    allowlistPath,
     github: {
       token: githubToken,
       owner: githubOwner,
@@ -118,6 +128,10 @@ function getBotConfig(): BotConfig {
       mainBranch: githubMainBranch,
     },
   };
+}
+
+function isValidChatId(value: string): boolean {
+  return /^-?\d+$/.test(value.trim());
 }
 
 function normalizeCommand(raw: string): string {
@@ -159,8 +173,39 @@ function normalizePath(input: string): string {
   return cleaned;
 }
 
+function encodeGitHubContentPath(path: string): string {
+  return path
+    .split("/")
+    .filter(Boolean)
+    .map((segment) => encodeURIComponent(segment))
+    .join("/");
+}
+
 function decodeBase64(content: string): string {
   return Buffer.from(content.replace(/\n/g, ""), "base64").toString("utf8");
+}
+
+async function fetchWithTimeout(
+  input: RequestInfo | URL,
+  init: RequestInit | undefined,
+  timeoutMs: number,
+  label: string,
+): Promise<Response> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(input, {
+      ...(init || {}),
+      signal: controller.signal,
+    });
+  } catch (error) {
+    if (error instanceof Error && error.name === "AbortError") {
+      throw new Error(`${label} timed out after ${Math.round(timeoutMs / 1000)}s`);
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 async function telegramApi(
@@ -168,11 +213,16 @@ async function telegramApi(
   method: string,
   payload: Record<string, unknown>,
 ): Promise<unknown> {
-  const res = await fetch(`https://api.telegram.org/bot${cfg.telegramToken}/${method}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
+  const res = await fetchWithTimeout(
+    `https://api.telegram.org/bot${cfg.telegramToken}/${method}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    },
+    HTTP_TIMEOUT_MS,
+    `Telegram ${method}`,
+  );
 
   const data = (await res.json()) as { ok: boolean; result?: unknown; description?: string };
   if (!data.ok) {
@@ -194,16 +244,21 @@ async function githubApi<T>(
   endpoint: string,
   init?: RequestInit,
 ): Promise<T> {
-  const res = await fetch(`https://api.github.com${endpoint}`, {
-    ...init,
-    headers: {
-      Accept: "application/vnd.github+json",
-      Authorization: `Bearer ${cfg.token}`,
-      "X-GitHub-Api-Version": "2022-11-28",
-      "Content-Type": "application/json",
-      ...(init?.headers || {}),
+  const res = await fetchWithTimeout(
+    `https://api.github.com${endpoint}`,
+    {
+      ...init,
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${cfg.token}`,
+        "X-GitHub-Api-Version": "2022-11-28",
+        "Content-Type": "application/json",
+        ...(init?.headers || {}),
+      },
     },
-  });
+    HTTP_TIMEOUT_MS,
+    `GitHub ${endpoint}`,
+  );
 
   if (!res.ok) {
     const errorText = await res.text();
@@ -321,6 +376,118 @@ async function createPullRequest(
   );
 }
 
+function parseAllowlistContent(content: string): Set<string> {
+  if (!content.trim()) return new Set<string>();
+
+  const parsed = JSON.parse(content) as unknown;
+  const list = Array.isArray(parsed)
+    ? parsed
+    : parsed && typeof parsed === "object" && Array.isArray((parsed as { allowedChatIds?: unknown }).allowedChatIds)
+      ? (parsed as { allowedChatIds: unknown[] }).allowedChatIds
+      : [];
+
+  return new Set(
+    list
+      .map((entry) => String(entry).trim())
+      .filter(Boolean)
+      .filter(isValidChatId),
+  );
+}
+
+function serializeAllowlistContent(ids: Set<string>, actorChatId: string): string {
+  return (
+    JSON.stringify(
+      {
+        allowedChatIds: [...ids].sort((a, b) => a.localeCompare(b)),
+        updatedAt: new Date().toISOString(),
+        updatedBy: actorChatId,
+      },
+      null,
+      2,
+    ) + "\n"
+  );
+}
+
+async function readAllowlist(cfg: BotConfig): Promise<AllowlistState> {
+  const encodedPath = encodeGitHubContentPath(cfg.allowlistPath);
+  const endpoint =
+    `/repos/${cfg.github.owner}/${cfg.github.repo}/contents/` +
+    `${encodedPath}?ref=${encodeURIComponent(cfg.github.mainBranch)}`;
+
+  const res = await fetchWithTimeout(
+    `https://api.github.com${endpoint}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${cfg.github.token}`,
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    },
+    HTTP_TIMEOUT_MS,
+    "GitHub allowlist read",
+  );
+
+  if (res.status === 404) {
+    return { ids: new Set<string>(), sha: null };
+  }
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Failed reading allowlist file: ${res.status} ${text}`);
+  }
+
+  const data = (await res.json()) as { content: string; encoding: string; sha: string };
+  if (data.encoding !== "base64") {
+    throw new Error(`Unsupported allowlist encoding: ${data.encoding}`);
+  }
+
+  const decoded = decodeBase64(data.content);
+  return { ids: parseAllowlistContent(decoded), sha: data.sha };
+}
+
+async function writeAllowlist(
+  cfg: BotConfig,
+  ids: Set<string>,
+  previousSha: string | null,
+  actorChatId: string,
+  actionLabel: string,
+): Promise<void> {
+  const content = serializeAllowlistContent(ids, actorChatId);
+  const endpoint =
+    `/repos/${cfg.github.owner}/${cfg.github.repo}/contents/` + encodeGitHubContentPath(cfg.allowlistPath);
+
+  const body: Record<string, unknown> = {
+    message: `bot: ${actionLabel} allowlist`,
+    content: Buffer.from(content, "utf8").toString("base64"),
+    branch: cfg.github.mainBranch,
+  };
+  if (previousSha) {
+    body.sha = previousSha;
+  }
+
+  const res = await fetchWithTimeout(
+    `https://api.github.com${endpoint}`,
+    {
+      method: "PUT",
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${cfg.github.token}`,
+        "X-GitHub-Api-Version": "2022-11-28",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    },
+    HTTP_TIMEOUT_MS,
+    "GitHub allowlist write",
+  );
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Failed writing allowlist file: ${res.status} ${text}`);
+  }
+}
+
 function pickTreeEntries(
   tree: Array<{ path: string; type: string; sha: string; size?: number }>,
 ): Array<{ path: string; sha: string; size: number }> {
@@ -424,9 +591,11 @@ function validateProposal(value: unknown): OpenAIProposal {
   return { summary, commitMessage, changes };
 }
 
-async function generateProposal(cfg: BotConfig, instruction: string): Promise<OpenAIProposal> {
-  const snapshot = await buildRepoSnapshot(cfg.github);
-
+async function generateProposal(
+  cfg: BotConfig,
+  instruction: string,
+  snapshot: string,
+): Promise<OpenAIProposal> {
   const systemPrompt = [
     "You are a coding assistant producing repository edits.",
     "Return STRICT JSON only. No markdown.",
@@ -447,21 +616,26 @@ async function generateProposal(cfg: BotConfig, instruction: string): Promise<Op
     snapshot,
   ].join("\n");
 
-  const response = await fetch("https://api.openai.com/v1/responses", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${cfg.openaiApiKey}`,
+  const response = await fetchWithTimeout(
+    "https://api.openai.com/v1/responses",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${cfg.openaiApiKey}`,
+      },
+      body: JSON.stringify({
+        model: cfg.openaiModel,
+        input: [
+          { role: "system", content: [{ type: "input_text", text: systemPrompt }] },
+          { role: "user", content: [{ type: "input_text", text: userPrompt }] },
+        ],
+        reasoning: { effort: "medium" },
+      }),
     },
-    body: JSON.stringify({
-      model: cfg.openaiModel,
-      input: [
-        { role: "system", content: [{ type: "input_text", text: systemPrompt }] },
-        { role: "user", content: [{ type: "input_text", text: userPrompt }] },
-      ],
-      reasoning: { effort: "medium" },
-    }),
-  });
+    OPENAI_TIMEOUT_MS,
+    "OpenAI proposal generation",
+  );
 
   if (!response.ok) {
     const text = await response.text();
@@ -517,9 +691,11 @@ async function handleWebCommand(cfg: BotConfig, chatId: number, instruction: str
     return;
   }
 
-  await sendTelegramMessage(cfg, chatId, "Processing /web request. I will open a PR if generation succeeds.");
-
-  const proposal = await generateProposal(cfg, instruction);
+  await sendTelegramMessage(cfg, chatId, "Step 1/4: Reading repository snapshot...");
+  const snapshot = await buildRepoSnapshot(cfg.github);
+  await sendTelegramMessage(cfg, chatId, "Step 2/4: Generating proposed code changes...");
+  const proposal = await generateProposal(cfg, instruction, snapshot);
+  await sendTelegramMessage(cfg, chatId, "Step 3/4: Creating commit and branch...");
   const baseSha = await getBranchHeadSha(cfg.github, cfg.github.mainBranch);
   const commitSha = await commitChangeSet(cfg.github, baseSha, proposal.commitMessage, proposal.changes);
 
@@ -527,6 +703,7 @@ async function handleWebCommand(cfg: BotConfig, chatId: number, instruction: str
   const branchName = `webbot/${new Date().toISOString().replace(/[:.]/g, "-")}-${branchSuffix}`;
 
   await createBranch(cfg.github, branchName, commitSha);
+  await sendTelegramMessage(cfg, chatId, "Step 4/4: Opening pull request...");
   const pr = await createPullRequest(
     cfg.github,
     branchName,
@@ -562,12 +739,14 @@ async function handleWebMainCommand(cfg: BotConfig, chatId: number, instruction:
     return;
   }
 
-  await sendTelegramMessage(cfg, chatId, "Processing /web-main request on main branch.");
-
-  const proposal = await generateProposal(cfg, instruction);
+  await sendTelegramMessage(cfg, chatId, "Step 1/3: Reading repository snapshot...");
+  const snapshot = await buildRepoSnapshot(cfg.github);
+  await sendTelegramMessage(cfg, chatId, "Step 2/3: Generating and committing changes to main...");
+  const proposal = await generateProposal(cfg, instruction, snapshot);
   const baseSha = await getBranchHeadSha(cfg.github, cfg.github.mainBranch);
   const commitSha = await commitChangeSet(cfg.github, baseSha, proposal.commitMessage, proposal.changes);
   await updateBranch(cfg.github, cfg.github.mainBranch, commitSha);
+  await sendTelegramMessage(cfg, chatId, "Step 3/3: Push to main completed, sending summary...");
 
   await sendTelegramMessage(
     cfg,
@@ -580,10 +759,97 @@ async function handleWebMainCommand(cfg: BotConfig, chatId: number, instruction:
   );
 }
 
+async function handleAllowCommand(
+  cfg: BotConfig,
+  chatId: number,
+  actorChatId: string,
+  targetChatIdRaw: string,
+  allowlist: AllowlistState,
+): Promise<void> {
+  const target = targetChatIdRaw.trim();
+  if (!target || !isValidChatId(target)) {
+    await sendTelegramMessage(cfg, chatId, "Usage: /allow <numeric_chat_id>");
+    return;
+  }
+
+  if (cfg.telegramAllowedChatIds.has(target) || allowlist.ids.has(target)) {
+    await sendTelegramMessage(cfg, chatId, `Chat ID ${target} is already allowlisted.`);
+    return;
+  }
+
+  const nextIds = new Set(allowlist.ids);
+  nextIds.add(target);
+  await writeAllowlist(cfg, nextIds, allowlist.sha, actorChatId, `allow ${target}`);
+  await sendTelegramMessage(
+    cfg,
+    chatId,
+    `Added ${target} to dynamic allowlist. They can now run bot commands.`,
+  );
+}
+
+async function handleRemoveIdCommand(
+  cfg: BotConfig,
+  chatId: number,
+  actorChatId: string,
+  targetChatIdRaw: string,
+  allowlist: AllowlistState,
+): Promise<void> {
+  const target = targetChatIdRaw.trim();
+  if (!target || !isValidChatId(target)) {
+    await sendTelegramMessage(cfg, chatId, "Usage: /removeid <numeric_chat_id>");
+    return;
+  }
+
+  if (cfg.telegramAllowedChatIds.has(target)) {
+    await sendTelegramMessage(
+      cfg,
+      chatId,
+      `Chat ID ${target} is in TELEGRAM_ALLOWED_CHAT_IDS env and cannot be removed with /removeid.`,
+    );
+    return;
+  }
+
+  if (!allowlist.ids.has(target)) {
+    await sendTelegramMessage(cfg, chatId, `Chat ID ${target} is not in dynamic allowlist.`);
+    return;
+  }
+
+  const nextIds = new Set(allowlist.ids);
+  nextIds.delete(target);
+  await writeAllowlist(cfg, nextIds, allowlist.sha, actorChatId, `remove ${target}`);
+  await sendTelegramMessage(cfg, chatId, `Removed ${target} from dynamic allowlist.`);
+}
+
+async function handleAllowlistCommand(
+  cfg: BotConfig,
+  chatId: number,
+  allowlist: AllowlistState,
+): Promise<void> {
+  const seedIds = [...cfg.telegramAllowedChatIds].sort((a, b) => a.localeCompare(b));
+  const dynamicIds = [...allowlist.ids].sort((a, b) => a.localeCompare(b));
+  const combined = [...new Set([...seedIds, ...dynamicIds])];
+
+  await sendTelegramMessage(
+    cfg,
+    chatId,
+    [
+      `Allowlisted chat IDs (${combined.length} total):`,
+      combined.length ? combined.join(", ") : "(none)",
+      "",
+      `Seed/admin IDs from env: ${seedIds.length}`,
+      `Dynamic IDs from ${cfg.allowlistPath}: ${dynamicIds.length}`,
+    ].join("\n"),
+  );
+}
+
 function helpText(cfg: BotConfig): string {
   return [
     "Commands:",
     "/web <instruction> - Generate code change and open a PR.",
+    "/allow <chat_id> - Admin-only: add dynamic allowlist entry.",
+    "/removeid <chat_id> - Admin-only: remove dynamic allowlist entry.",
+    "/allowlist - Admin-only: list allowlisted chat IDs.",
+    "/whoami - Return your Telegram chat ID.",
     "/status - Show bot mode.",
     "/help - Show commands.",
     cfg.allowDirectMainPush
@@ -598,13 +864,34 @@ async function processUpdate(cfg: BotConfig, update: TelegramUpdate): Promise<vo
   if (!message || typeof message.text !== "string") return;
 
   const chatId = message.chat.id;
-  if (!cfg.telegramAllowedChatIds.has(String(chatId))) {
-    await sendTelegramMessage(cfg, chatId, "Unauthorized chat.");
+  const chatIdStr = String(chatId);
+  const { command, arg } = parseCommand(message.text);
+  if (!command) return;
+
+  if (command === "/whoami" || command === "/id") {
+    await sendTelegramMessage(
+      cfg,
+      chatId,
+      [
+        `Your chat ID is: ${chatId}`,
+        "Send this number to an admin and ask them to run /allow <your_id>.",
+      ].join("\n"),
+    );
     return;
   }
 
-  const { command, arg } = parseCommand(message.text);
-  if (!command) return;
+  const allowlist = await readAllowlist(cfg);
+  const isAdmin = cfg.telegramAllowedChatIds.has(chatIdStr);
+  const isAllowed = isAdmin || allowlist.ids.has(chatIdStr);
+
+  if (!isAllowed) {
+    await sendTelegramMessage(
+      cfg,
+      chatId,
+      "Unauthorized chat. Use /whoami and ask an admin to run /allow <your_id>.",
+    );
+    return;
+  }
 
   if (command === "/start" || command === "/help") {
     await sendTelegramMessage(cfg, chatId, helpText(cfg));
@@ -620,8 +907,36 @@ async function processUpdate(cfg: BotConfig, update: TelegramUpdate): Promise<vo
         `Repo: ${cfg.github.owner}/${cfg.github.repo}`,
         `Base branch: ${cfg.github.mainBranch}`,
         `Direct main push: ${cfg.allowDirectMainPush ? "enabled" : "disabled"}`,
+        `Admin mode: ${isAdmin ? "yes" : "no"}`,
       ].join("\n"),
     );
+    return;
+  }
+
+  if (command === "/allow") {
+    if (!isAdmin) {
+      await sendTelegramMessage(cfg, chatId, "Only admin IDs can run /allow.");
+      return;
+    }
+    await handleAllowCommand(cfg, chatId, chatIdStr, arg, allowlist);
+    return;
+  }
+
+  if (command === "/removeid" || command === "/unallow" || command === "/denyid") {
+    if (!isAdmin) {
+      await sendTelegramMessage(cfg, chatId, "Only admin IDs can run /removeid.");
+      return;
+    }
+    await handleRemoveIdCommand(cfg, chatId, chatIdStr, arg, allowlist);
+    return;
+  }
+
+  if (command === "/allowlist") {
+    if (!isAdmin) {
+      await sendTelegramMessage(cfg, chatId, "Only admin IDs can run /allowlist.");
+      return;
+    }
+    await handleAllowlistCommand(cfg, chatId, allowlist);
     return;
   }
 
@@ -689,4 +1004,3 @@ export async function POST(request: Request): Promise<Response> {
 
   return Response.json({ ok: true });
 }
-

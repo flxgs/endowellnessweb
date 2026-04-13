@@ -18,10 +18,15 @@ This repo includes a Vercel-compatible Telegram bot endpoint at:
 `/api/telegram/webhook`
 
 The bot no longer relies on local git state or long polling. It uses OpenAI + GitHub APIs.
+It evaluates the repository from GitHub (`GITHUB_REPO_OWNER` / `GITHUB_REPO_NAME` / `GITHUB_MAIN_BRANCH`), not local uncommitted files.
 
 ### Commands
 
 - `/web <instruction>`: generates code edits and opens a PR.
+- `/whoami`: replies with your Telegram chat ID (for allowlist onboarding).
+- `/allow <chat_id>`: admin-only, add chat ID directly from Telegram.
+- `/removeid <chat_id>`: admin-only, remove dynamic allowlist chat ID.
+- `/allowlist`: admin-only, print current allowlisted IDs.
 - `/web-main <instruction>`: optional high-risk direct push to `main` (disabled by default).
 - `/status`: shows current bot mode and repo target.
 - `/help`: shows commands.
@@ -42,6 +47,7 @@ Use `.env.bot.example` as the reference.
 
 - `OPENAI_MODEL` (default: `gpt-5.3-codex`)
 - `GITHUB_MAIN_BRANCH` (default: `main`)
+- `GITHUB_ALLOWLIST_PATH` (default: `.bot/allowlist.json`)
 - `WEB_BOT_ENABLE_DIRECT_MAIN_PUSH` (default: `false`)
 
 ### Configure Telegram webhook
@@ -55,9 +61,11 @@ https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/setWebhook?url=https://<your-do
 ### Get chat IDs safely
 
 1. User sends `/start` to the bot.
-2. Open:
-`https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/getUpdates`
-3. Read `message.chat.id` and add it to `TELEGRAM_ALLOWED_CHAT_IDS`.
+2. User runs `/whoami` and copies their chat ID.
+3. Admin runs `/allow <chat_id>` in Telegram.
+
+Alternative:
+`https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/getUpdates` and read `message.chat.id`.
 
 ### Security guidance
 
