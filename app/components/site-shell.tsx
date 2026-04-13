@@ -13,8 +13,15 @@ export function SiteShell({ children }: SiteShellProps) {
     <div className="site-shell">
       <header className="site-header">
         <Link href="/" className="brand-mark" aria-label={`${siteName} home`}>
+          <Image
+            src="/blue-gradient.svg"
+            alt="ENDO logo"
+            width={148}
+            height={44}
+            className="brand-logo"
+            priority
+          />
           <span className="brand-kicker">Wellness Club</span>
-          <span className="brand-name">ENDO</span>
         </Link>
         <nav className="site-nav" aria-label="Primary">
           {navLinks.map((link) => (

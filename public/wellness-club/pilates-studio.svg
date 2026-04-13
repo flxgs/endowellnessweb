@@ -6,12 +6,12 @@
   <rect x="486" y="204" width="264" height="702" rx="26" fill="#E4EFE8"/>
   <rect x="776" y="204" width="240" height="702" rx="26" fill="#E8DDCF"/>
   <rect x="232" y="962" width="736" height="248" rx="32" fill="#F4EBDE"/>
-  <g stroke="#35594D" stroke-opacity="0.3" stroke-width="10">
+  <g stroke="#294D79" stroke-opacity="0.3" stroke-width="10">
     <path d="M258 1064H948"/>
     <path d="M258 1118H948"/>
     <path d="M258 1172H948"/>
   </g>
-  <g fill="#D7E8DF" stroke="#35594D" stroke-opacity="0.14" stroke-width="4">
+  <g fill="#D8E4F4" stroke="#294D79" stroke-opacity="0.14" stroke-width="4">
     <rect x="234" y="1030" width="172" height="92" rx="18"/>
     <rect x="432" y="1030" width="172" height="92" rx="18"/>
     <rect x="630" y="1030" width="172" height="92" rx="18"/>

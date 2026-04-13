@@ -14,7 +14,7 @@
     <path d="M234 998H528"/>
     <path d="M672 998H966"/>
   </g>
-  <g fill="#145847">
+  <g fill="#183A68">
     <rect x="214" y="724" width="48" height="236" rx="20"/>
     <rect x="500" y="724" width="48" height="236" rx="20"/>
     <rect x="652" y="724" width="48" height="236" rx="20"/>
@@ -27,7 +27,7 @@
     <circle cx="820" cy="896" r="44"/>
   </g>
   <rect x="220" y="244" width="250" height="160" rx="20" fill="#FBF6EF"/>
-  <rect x="504" y="244" width="250" height="160" rx="20" fill="#D7E8DF"/>
+  <rect x="504" y="244" width="250" height="160" rx="20" fill="#D8E4F4"/>
   <rect x="788" y="244" width="190" height="160" rx="20" fill="#FBF6EF"/>
   <text x="192" y="128" fill="#274137" font-family="Georgia, serif" font-size="44" letter-spacing="5">STRENGTH FLOOR</text>
   <text x="192" y="1246" fill="#5B645D" font-family="Arial, sans-serif" font-size="24" letter-spacing="3">RACKS · MACHINES · POWERLIFTING LANES</text>

@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import { SiteShell } from "./components/site-shell";
 
-const displayFont = Cormorant_Garamond({
+const displayFont = Manrope({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
 });
 
-const bodyFont = Plus_Jakarta_Sans({
+const bodyFont = Inter({
   variable: "--font-body",
   subsets: ["latin"],
 });

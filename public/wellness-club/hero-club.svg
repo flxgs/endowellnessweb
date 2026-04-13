@@ -2,13 +2,13 @@
   <rect width="1200" height="1500" fill="#EEE8DE"/>
   <rect width="1200" height="1500" fill="url(#bg)"/>
   <circle cx="222" cy="232" r="220" fill="#D98E62" fill-opacity="0.22"/>
-  <circle cx="985" cy="183" r="280" fill="#1D6A5A" fill-opacity="0.2"/>
+  <circle cx="985" cy="183" r="280" fill="#315f97" fill-opacity="0.2"/>
   <rect x="88" y="100" width="1024" height="1300" rx="36" fill="#FBF6EF" fill-opacity="0.85" stroke="#274137" stroke-opacity="0.14"/>
   <rect x="150" y="180" width="900" height="1140" rx="26" fill="#F7F1E8"/>
   <rect x="210" y="246" width="488" height="362" rx="22" fill="#E1D1BC"/>
-  <rect x="738" y="246" width="252" height="560" rx="22" fill="#D7E8DF"/>
+  <rect x="738" y="246" width="252" height="560" rx="22" fill="#D8E4F4"/>
   <rect x="210" y="648" width="300" height="150" rx="18" fill="#C16D43"/>
-  <rect x="532" y="648" width="166" height="150" rx="18" fill="#35594D"/>
+  <rect x="532" y="648" width="166" height="150" rx="18" fill="#294d79"/>
   <rect x="210" y="840" width="780" height="180" rx="24" fill="#EEE5D9"/>
   <rect x="210" y="1054" width="780" height="160" rx="24" fill="#F4EBDD"/>
   <rect x="274" y="1112" width="148" height="18" rx="9" fill="#274137" fill-opacity="0.16"/>
@@ -17,7 +17,7 @@
   <rect x="768" y="380" width="192" height="68" rx="18" fill="#FBF6EF"/>
   <rect x="768" y="474" width="192" height="68" rx="18" fill="#FBF6EF"/>
   <path d="M280 487C280 410.784 341.784 349 418 349H490C566.216 349 628 410.784 628 487V608H280V487Z" fill="#F7F1E8" stroke="#274137" stroke-opacity="0.15"/>
-  <rect x="250" y="1238" width="350" height="60" rx="18" fill="#145847"/>
+  <rect x="250" y="1238" width="350" height="60" rx="18" fill="#183A68"/>
   <rect x="630" y="1238" width="230" height="60" rx="18" fill="#FFFFFF" fill-opacity="0.74" stroke="#274137" stroke-opacity="0.12"/>
   <text x="250" y="133" fill="#274137" font-family="Georgia, serif" font-size="42" letter-spacing="5">ENDO WELLNESS CLUB</text>
   <text x="250" y="1268" fill="#FBF6EF" font-family="Arial, sans-serif" font-size="24" letter-spacing="3">STRENGTH + RECOVERY + HOSPITALITY</text>
