@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "bot:web": "node scripts/telegram-web-bot.mjs"
   },
   "dependencies": {
     "next": "16.2.3",
