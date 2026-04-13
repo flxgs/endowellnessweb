@@ -21,7 +21,6 @@ export function SiteShell({ children }: SiteShellProps) {
             className="brand-logo"
             priority
           />
-          <span className="brand-kicker">Wellness Club</span>
         </Link>
         <nav className="site-nav" aria-label="Primary">
           {navLinks.map((link) => (
@@ -34,7 +33,7 @@ export function SiteShell({ children }: SiteShellProps) {
           Book a Visit
         </Link>
       </header>
-      <main>{children}</main>
+      <main className="site-main">{children}</main>
       <footer className="site-footer">
         <div>
           <p className="footer-title">{siteName}</p>

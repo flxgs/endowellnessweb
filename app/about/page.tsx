@@ -36,13 +36,19 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="pillar-grid">
-        {pillars.map((pillar) => (
-          <article key={pillar.title} className="pillar-card">
-            <h3>{pillar.title}</h3>
-            <p>{pillar.description}</p>
-          </article>
-        ))}
+      <section className="section-block">
+        <div className="section-heading">
+          <p className="eyebrow">What membership covers</p>
+          <h2>Training, guidance, and recovery are planned as one system.</h2>
+        </div>
+        <div className="pillar-grid">
+          {pillars.map((pillar) => (
+            <article key={pillar.title} className="pillar-card">
+              <h3>{pillar.title}</h3>
+              <p>{pillar.description}</p>
+            </article>
+          ))}
+        </div>
       </section>
     </div>
   );
