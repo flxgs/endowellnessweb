@@ -1,0 +1,31 @@
+<svg width="1200" height="1500" viewBox="0 0 1200 1500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="1500" fill="#EFE8DD"/>
+  <rect x="84" y="96" width="1032" height="1308" rx="42" fill="#FBF6EF" stroke="#274137" stroke-opacity="0.12"/>
+  <rect x="144" y="164" width="912" height="1172" rx="28" fill="#F9F2E9"/>
+  <rect x="182" y="204" width="278" height="702" rx="26" fill="#E8DDCF"/>
+  <rect x="486" y="204" width="264" height="702" rx="26" fill="#E4EFE8"/>
+  <rect x="776" y="204" width="240" height="702" rx="26" fill="#E8DDCF"/>
+  <rect x="232" y="962" width="736" height="248" rx="32" fill="#F4EBDE"/>
+  <g stroke="#35594D" stroke-opacity="0.3" stroke-width="10">
+    <path d="M258 1064H948"/>
+    <path d="M258 1118H948"/>
+    <path d="M258 1172H948"/>
+  </g>
+  <g fill="#D7E8DF" stroke="#35594D" stroke-opacity="0.14" stroke-width="4">
+    <rect x="234" y="1030" width="172" height="92" rx="18"/>
+    <rect x="432" y="1030" width="172" height="92" rx="18"/>
+    <rect x="630" y="1030" width="172" height="92" rx="18"/>
+  </g>
+  <g fill="#C16D43" fill-opacity="0.88">
+    <circle cx="312" cy="374" r="56"/>
+    <circle cx="618" cy="320" r="56"/>
+    <circle cx="898" cy="388" r="56"/>
+  </g>
+  <g stroke="#274137" stroke-opacity="0.18" stroke-width="16" stroke-linecap="round">
+    <path d="M312 432V664"/>
+    <path d="M618 378V664"/>
+    <path d="M898 446V664"/>
+  </g>
+  <text x="198" y="130" fill="#274137" font-family="Georgia, serif" font-size="44" letter-spacing="5">PILATES STUDIO</text>
+  <text x="198" y="1288" fill="#5B645D" font-family="Arial, sans-serif" font-size="24" letter-spacing="3">REFORMER · MAT FLOW · ALIGNMENT WORK</text>
+</svg>

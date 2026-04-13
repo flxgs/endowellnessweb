@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "krea-ai": {
+      "source": "krea-ai/skills",
+      "sourceType": "github",
+      "computedHash": "114073c33cc5c993ffd3dcd58075a5f990a1b1ef4d218f72522f2789e8af828d"
+    }
+  }
+}
