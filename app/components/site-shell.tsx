@@ -16,10 +16,11 @@ export function SiteShell({ children }: SiteShellProps) {
           <Image
             src="/blue-gradient.svg"
             alt="ENDO logo"
-            width={148}
-            height={44}
+            width={88}
+            height={88}
             className="brand-logo"
             priority
+            sizes="(max-width: 900px) 56px, 72px"
           />
         </Link>
         <nav className="site-nav" aria-label="Primary">
