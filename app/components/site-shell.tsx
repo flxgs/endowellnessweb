@@ -1,7 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 
+import { Link } from "@/i18n/navigation";
+
+import { LocaleSwitcher } from "./locale-switcher";
 import { navLinks, siteName } from "../site-data";
 
 type SiteShellProps = {
@@ -9,10 +12,12 @@ type SiteShellProps = {
 };
 
 export function SiteShell({ children }: SiteShellProps) {
+  const t = useTranslations("Shell");
+
   return (
     <div className="site-shell">
       <header className="site-header">
-        <Link href="/" className="brand-mark" aria-label={`${siteName} home`}>
+        <Link href="/" className="brand-mark" aria-label={t("homeAriaLabel")}>
           <Image
             src="/blue-gradient.svg"
             alt="ENDO logo"
@@ -26,26 +31,27 @@ export function SiteShell({ children }: SiteShellProps) {
         <nav className="site-nav" aria-label="Primary">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href} className="site-nav-link">
-              {link.label}
+              {t(link.labelKey)}
             </Link>
           ))}
         </nav>
-        <Link href="/membership" className="nav-cta">
-          Book a Visit
-        </Link>
+        <div className="header-actions">
+          <LocaleSwitcher />
+          <Link href="/membership" className="nav-cta">
+            {t("bookVisit")}
+          </Link>
+        </div>
       </header>
       <main className="site-main">{children}</main>
       <footer className="site-footer">
         <div>
           <p className="footer-title">{siteName}</p>
-          <p className="footer-copy">
-            Strength, recovery, movement, nutrition, and social wellness under one roof.
-          </p>
+          <p className="footer-copy">{t("footerCopy")}</p>
         </div>
         <div className="footer-links">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href}>
-              {link.label}
+              {t(link.labelKey)}
             </Link>
           ))}
         </div>

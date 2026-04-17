@@ -1,4 +1,8 @@
-import type { FaqItem } from "../site-data";
+export type FaqItem = {
+  question: string;
+  answer: string[];
+  bullets?: string[];
+};
 
 type FaqSectionProps = {
   items: FaqItem[];

@@ -1,11 +1,11 @@
 export const siteName = "ENDO Wellness Club";
 
 export const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/schedule", label: "Classes" },
-  { href: "/membership", label: "Membership" },
+  { href: "/", labelKey: "nav.home" },
+  { href: "/about", labelKey: "nav.about" },
+  { href: "/gallery", labelKey: "nav.gallery" },
+  { href: "/schedule", labelKey: "nav.classes" },
+  { href: "/membership", labelKey: "nav.membership" },
 ];
 
 export const pillars = [
@@ -169,143 +169,4 @@ export const clubNotes = [
   "Member café with recovery beverages and anti-inflammatory meal options",
   "On-site professionals for nutrition, performance, and habit coaching",
   "Open gym zones balanced with restorative spaces and social programming",
-];
-
-export type FaqItem = {
-  question: string;
-  answer: string[];
-  bullets?: string[];
-};
-
-export const frequentlyAskedQuestions: FaqItem[] = [
-  {
-    question: "¿Qué significa que somos un centro multidisciplinar?",
-    answer: [
-      "Significa que no trabajamos de forma aislada.",
-      "Si vienes por una lesión, tu tratamiento no se limita a una sola área: fisioterapia, entrenamiento, nutrición y psicología trabajan de forma coordinada para acelerar tu recuperación y mejorar resultados. Todo el equipo está alineado con un único objetivo: tu salud.",
-    ],
-  },
-  {
-    question: "No estoy en forma, ¿puedo apuntarme?",
-    answer: [
-      "Sí. De hecho, es el mejor momento para empezar.",
-      "No necesitas estar en forma para venir: vienes precisamente para conseguirlo. Adaptamos cada sesión a tu nivel actual, sin importar tu punto de partida.",
-    ],
-  },
-  {
-    question: "¿Cómo sé por qué servicio debo empezar?",
-    answer: [
-      "No tienes que decidirlo tú.",
-      "En tu primera visita realizamos una valoración inicial y, en función de tu situación y objetivos, te recomendamos el camino más eficiente.",
-    ],
-  },
-  {
-    question: "¿Las sesiones de entrenamiento son grupales o individuales?",
-    answer: ["Trabajamos ambas opciones."],
-    bullets: [
-      "Grupos reducidos (máx. 6 personas): atención personalizada + motivación de grupo.",
-      "Sesiones individuales: máxima personalización y exigencia.",
-    ],
-  },
-  {
-    question: "Tengo poco tiempo o una rutina complicada, ¿es para mí?",
-    answer: [
-      "Sí.",
-      "Disponemos de un amplio abanico de horarios y adaptamos los servicios a tu estilo de vida. El objetivo es que el proceso encaje contigo, no al revés.",
-    ],
-  },
-  {
-    question: "Tengo una lesión o dolor crónico, ¿puedo entrenar?",
-    answer: [
-      "Sí, y es precisamente donde más sentido tiene.",
-      "Al contar con fisioterapeutas en el equipo, diseñamos programas de entrenamiento adaptados a patologías y procesos de recuperación, garantizando seguridad y progresión.",
-    ],
-  },
-  {
-    question: "¿Es obligatorio seguir una dieta si solo quiero entrenar?",
-    answer: [
-      "No es obligatorio.",
-      "Puedes contratar solo entrenamiento, pero siempre te orientaremos en nutrición porque es una parte clave del progreso.",
-    ],
-  },
-  {
-    question: "¿Por qué hay un psicólogo en el centro?",
-    answer: [
-      "Porque el cambio no es solo físico.",
-      "Trabajamos aspectos como motivación, relación con la comida, estrés o adherencia al proceso. Es una pieza fundamental para conseguir resultados duraderos.",
-    ],
-  },
-  {
-    question: "¿Hacéis dietas milagro o usáis suplementos obligatorios?",
-    answer: [
-      "No.",
-      "Trabajamos con alimentación real, sostenible y basada en evidencia científica. La suplementación nunca es obligatoria: solo se recomienda si aporta valor en tu caso concreto.",
-    ],
-  },
-  {
-    question: "¿Qué pasa si no puedo asistir a una sesión?",
-    answer: [
-      "Puedes cancelarla o reprogramarla avisando con la antelación mínima establecida, sin coste adicional.",
-    ],
-  },
-  {
-    question: "¿Qué tengo que llevar el primer día?",
-    answer: ["Ropa deportiva cómoda, agua y toalla.", "Nosotros nos encargamos del resto."],
-  },
-  {
-    question: "¿Qué duración tienen los bonos?",
-    answer: ["Los bonos tienen validez mensual.", "Buscamos continuidad y resultados, no acumulación de sesiones."],
-  },
-  {
-    question: "¿Puedo darme de baja cuando quiera?",
-    answer: [
-      "Sí, no hay permanencia.",
-      "Solo pedimos aviso antes del día 15 del mes anterior para gestionar la baja correctamente.",
-    ],
-  },
-  {
-    question: "¿Quién puede beneficiarse de este servicio?",
-    answer: ["Cualquier persona que quiera mejorar su salud."],
-    bullets: [
-      "Pérdida de grasa.",
-      "Ganancia muscular.",
-      "Mejora del rendimiento.",
-      "Recuperación de lesiones.",
-      "Mejora general del bienestar.",
-    ],
-  },
-  {
-    question: "¿Cómo resuelvo mis dudas durante el proceso?",
-    answer: [
-      "Tendrás contacto directo con el equipo a través de WhatsApp o email.",
-      "Las dudas se resuelven de forma ágil y continua.",
-    ],
-  },
-  {
-    question: "Si contrato el servicio, ¿tendré resultados?",
-    answer: [
-      "Nosotros ponemos el sistema, el seguimiento y la experiencia.",
-      "Los resultados dependen de la implicación en el proceso. Si hay compromiso, los resultados llegan.",
-    ],
-  },
-  {
-    question: "¿Los planes nutricionales incluyen suplementación?",
-    answer: [
-      "Son 100% personalizados.",
-      "La suplementación es opcional y solo se recomienda si es útil para tu objetivo. La decisión final siempre es tuya.",
-    ],
-  },
-  {
-    question: "¿Cuál es el precio de los servicios?",
-    answer: [
-      "Trabajamos con un modelo flexible basado en membresías y servicios individuales, adaptados a tus necesidades y objetivos.",
-      "El precio no depende únicamente del nivel de personalización, sino del tipo de servicio y del acompañamiento que necesites en cada momento.",
-      "Tras una primera valoración, te recomendaremos la opción más adecuada para ti. Nuestro objetivo es que pagues solo por lo que realmente necesitas, ni más ni menos.",
-    ],
-    bullets: [
-      "Membresías centradas en entrenamiento.",
-      "Planes más completos que integran varias áreas (entrenamiento, fisioterapia, nutrición, etc.).",
-      "Servicios puntuales o sesiones individuales.",
-    ],
-  },
 ];

@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
+
+import { Link } from "@/i18n/navigation";
 
 import {
   clubNotes,
@@ -7,7 +8,7 @@ import {
   galleryImages,
   pillars,
   stats,
-} from "./site-data";
+} from "../site-data";
 
 export default function Home() {
   return (

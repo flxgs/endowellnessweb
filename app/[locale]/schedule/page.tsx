@@ -1,5 +1,5 @@
-import { PageHero } from "../components/page-hero";
-import { classSchedule } from "../site-data";
+import { PageHero } from "../../components/page-hero";
+import { classSchedule } from "../../site-data";
 
 export default function SchedulePage() {
   return (

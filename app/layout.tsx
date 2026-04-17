@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
+
 import "./globals.css";
-import { SiteShell } from "./components/site-shell";
 
 const displayFont = Manrope({
   variable: "--font-display",
@@ -27,9 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
-      <body>
-        <SiteShell>{children}</SiteShell>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

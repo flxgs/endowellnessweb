@@ -1,0 +1,169 @@
+{
+  "Shell": {
+    "homeAriaLabel": "ENDO home",
+    "bookVisit": "Book a Visit",
+    "footerCopy": "Strength, recovery, movement, nutrition, and social wellness under one roof.",
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "gallery": "Gallery",
+      "classes": "Classes",
+      "membership": "Membership"
+    }
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "en": "EN",
+    "es": "ES"
+  },
+  "MembershipPage": {
+    "faqEyebrow": "FAQ · Frequently Asked Questions",
+    "faqTitle": "Everything you need to know before you start.",
+    "faqIntro": "Whether you're starting from zero or already training, here are the most common questions answered.",
+    "visitEyebrow": "Visit the club",
+    "visitTitle": "Book a walkthrough, meet the team, and train for a day before joining.",
+    "viewScheduleCta": "See the Class Schedule",
+    "faqItems": [
+      {
+        "question": "What does it mean that we are a multidisciplinary center?",
+        "answer": [
+          "It means we do not work in isolation.",
+          "If you come because of an injury, your treatment is not limited to one area: physiotherapy, training, nutrition and psychology work in coordination to accelerate your recovery and improve outcomes. The whole team is aligned with one goal: your health."
+        ]
+      },
+      {
+        "question": "I'm not fit yet, can I join?",
+        "answer": [
+          "Yes. In fact, this is the best moment to start.",
+          "You do not need to be fit to come here: you come here to become fit. We adapt every session to your current level, no matter your starting point."
+        ]
+      },
+      {
+        "question": "How do I know which service I should start with?",
+        "answer": [
+          "You do not need to decide that on your own.",
+          "In your first visit we do an initial assessment and, based on your situation and goals, we recommend the most efficient path."
+        ]
+      },
+      {
+        "question": "Are training sessions group-based or individual?",
+        "answer": [
+          "We offer both formats."
+        ],
+        "bullets": [
+          "Small groups (max. 6 people): personalized attention + group motivation.",
+          "One-to-one sessions: maximum personalization and demand."
+        ]
+      },
+      {
+        "question": "I have limited time or a complicated routine, is this for me?",
+        "answer": [
+          "Yes.",
+          "We offer a wide schedule range and adapt services to your lifestyle. The goal is for the process to fit you, not the other way around."
+        ]
+      },
+      {
+        "question": "I have an injury or chronic pain, can I train?",
+        "answer": [
+          "Yes, and this is exactly where it makes the most sense.",
+          "Because physiotherapists are part of the team, we design training programs adapted to pathologies and recovery processes, ensuring safety and progression."
+        ]
+      },
+      {
+        "question": "Is it mandatory to follow a diet if I only want to train?",
+        "answer": [
+          "No, it is not mandatory.",
+          "You can hire training only, but we will always guide you on nutrition because it is a key part of progress."
+        ]
+      },
+      {
+        "question": "Why is there a psychologist in the center?",
+        "answer": [
+          "Because change is not only physical.",
+          "We work on motivation, your relationship with food, stress, and process adherence. It is a fundamental piece for long-lasting results."
+        ]
+      },
+      {
+        "question": "Do you do miracle diets or mandatory supplements?",
+        "answer": [
+          "No.",
+          "We work with real, sustainable, evidence-based nutrition. Supplementation is never mandatory: it is only recommended if it adds value in your specific case."
+        ]
+      },
+      {
+        "question": "What happens if I cannot attend a session?",
+        "answer": [
+          "You can cancel or reschedule by giving the minimum required notice, with no additional cost."
+        ]
+      },
+      {
+        "question": "What should I bring on the first day?",
+        "answer": [
+          "Comfortable sportswear, water, and a towel.",
+          "We take care of everything else."
+        ]
+      },
+      {
+        "question": "How long are session bundles valid?",
+        "answer": [
+          "Bundles are valid monthly.",
+          "We prioritize continuity and results, not session accumulation."
+        ]
+      },
+      {
+        "question": "Can I cancel whenever I want?",
+        "answer": [
+          "Yes, there is no long-term commitment.",
+          "We only ask for notice before the 15th of the previous month to process cancellation correctly."
+        ]
+      },
+      {
+        "question": "Who can benefit from this service?",
+        "answer": [
+          "Anyone who wants to improve their health."
+        ],
+        "bullets": [
+          "Fat loss.",
+          "Muscle gain.",
+          "Performance improvement.",
+          "Injury recovery.",
+          "General wellbeing improvement."
+        ]
+      },
+      {
+        "question": "How do I solve doubts during the process?",
+        "answer": [
+          "You will have direct contact with the team through WhatsApp or email.",
+          "Questions are resolved quickly and continuously."
+        ]
+      },
+      {
+        "question": "If I hire the service, will I get results?",
+        "answer": [
+          "We provide the system, the follow-up and the experience.",
+          "Results depend on your involvement in the process. With commitment, results come."
+        ]
+      },
+      {
+        "question": "Do nutrition plans include supplementation?",
+        "answer": [
+          "Plans are 100% personalized.",
+          "Supplementation is optional and only recommended if useful for your goal. The final decision is always yours."
+        ]
+      },
+      {
+        "question": "What is the price of the services?",
+        "answer": [
+          "We work with a flexible model based on memberships and individual services, adapted to your needs and goals.",
+          "Price does not depend only on personalization level, but also on service type and the support you need at each stage.",
+          "After an initial assessment, we recommend the most suitable option for you. Our goal is for you to pay only for what you truly need, no more and no less."
+        ],
+        "bullets": [
+          "Training-focused memberships.",
+          "More complete plans integrating multiple areas (training, physiotherapy, nutrition, etc.).",
+          "Single services or individual sessions."
+        ]
+      }
+    ]
+  }
+}

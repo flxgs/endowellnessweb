@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import { PageHero } from "../components/page-hero";
-import { pillars } from "../site-data";
+import { PageHero } from "../../components/page-hero";
+import { pillars } from "../../site-data";
 
 export default function AboutPage() {
   return (

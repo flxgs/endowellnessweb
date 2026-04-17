@@ -11,6 +11,30 @@ npm run dev
 
 Open `http://localhost:3000`.
 
+## Localization (next-intl)
+
+This app uses `next-intl` with locale-based routing (`/en/*`, `/es/*`).
+
+- Routing config: `i18n/routing.ts`
+- Request config: `i18n/request.ts`
+- Proxy: `proxy.ts`
+- Messages: `messages/en.json`, `messages/es.json`
+
+Required team rule:
+
+- Every new user-facing string must be added as a translation key in both locale files.
+- Do not ship new hardcoded UI strings in components.
+
+Validation:
+
+```bash
+npm run i18n:check
+```
+
+Build also enforces this check (`npm run build` runs `i18n:check` first).
+
+Detailed workflow: `docs/i18n.md`.
+
 ## Telegram webhook bot (Vercel-compatible)
 
 This repo includes a Vercel-compatible Telegram bot endpoint at:
