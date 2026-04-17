@@ -1,36 +1,68 @@
 import Image from "next/image";
+import { getMessages } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
 
-import {
-  clubNotes,
-  featuredPrograms,
-  galleryImages,
-  pillars,
-  stats,
-} from "../site-data";
+type HomeSpace = {
+  title: string;
+  description: string;
+  image: string;
+  alt: string;
+};
 
-export default function Home() {
+type HomeReview = {
+  name: string;
+  rating: string;
+  text: string;
+};
+
+type HomeStat = {
+  value: string;
+  label: string;
+};
+
+type HomePageMessages = {
+  heroEyebrow: string;
+  heroTitle: string;
+  heroDescription: string;
+  primaryCta: string;
+  secondaryCta: string;
+  heroBadgeTop: string;
+  heroBadgeBottom: string;
+  introEyebrow: string;
+  introTitle: string;
+  introDescription: string;
+  spacesEyebrow: string;
+  spacesTitle: string;
+  reviewsEyebrow: string;
+  reviewsTitle: string;
+  reviewsDescription: string;
+  stats: HomeStat[];
+  spaces: HomeSpace[];
+  reviews: HomeReview[];
+};
+
+export default async function Home() {
+  const messages = (await getMessages()) as { HomePage: HomePageMessages };
+  const home = messages.HomePage;
+
   return (
     <div className="page-stack">
       <section className="hero-grid">
         <div className="hero-copy">
-          <p className="eyebrow">Performance meets restoration</p>
-          <h1>A wellness club for people who want more than a gym.</h1>
-          <p className="hero-text">
-            ENDO pairs powerlifting equipment, pilates studios, dance programming, nutrition
-            guidance, and recovery spaces into one membership that actually feels elevated.
-          </p>
+          <p className="eyebrow">{home.heroEyebrow}</p>
+          <h1>{home.heroTitle}</h1>
+          <p className="hero-text">{home.heroDescription}</p>
           <div className="hero-actions">
-            <Link href="/membership" className="primary-button">
-              Explore Membership
+            <Link href="/servicios" className="primary-button">
+              {home.primaryCta}
             </Link>
-            <Link href="/schedule" className="secondary-button">
-              View This Week&apos;s Classes
+            <Link href="/contacto" className="secondary-button">
+              {home.secondaryCta}
             </Link>
           </div>
           <div className="stats-grid">
-            {stats.map((stat) => (
+            {home.stats.map((stat) => (
               <div key={stat.label} className="stat-card">
                 <strong>{stat.value}</strong>
                 <span>{stat.label}</span>
@@ -47,81 +79,49 @@ export default function Home() {
             priority
           />
           <div className="hero-badge">
-            <span>Now booking</span>
-            <strong>Founding memberships</strong>
+            <span>{home.heroBadgeTop}</span>
+            <strong>{home.heroBadgeBottom}</strong>
           </div>
         </div>
       </section>
 
       <section className="section-block">
         <div className="section-heading">
-          <p className="eyebrow">Designed as a club</p>
-          <h2>Every square foot supports strength, softness, and consistency.</h2>
+          <p className="eyebrow">{home.introEyebrow}</p>
+          <h2>{home.introTitle}</h2>
         </div>
-        <div className="pillar-grid">
-          {pillars.map((pillar) => (
-            <article key={pillar.title} className="pillar-card">
-              <h3>{pillar.title}</h3>
-              <p>{pillar.description}</p>
-            </article>
-          ))}
-        </div>
+        <p className="page-hero-copy">{home.introDescription}</p>
       </section>
 
-      <section className="split-feature">
-        <div className="split-gallery">
-          <Image
-            src="/wellness-club/pilates-studio.png"
-            alt="Pilates reformer studio with warm natural lighting"
-            width={800}
-            height={900}
-          />
-          <Image
-            src="/wellness-club/strength-floor.png"
-            alt="Strength training floor with machines and lifting stations"
-            width={800}
-            height={900}
-          />
+      <section className="section-block">
+        <div className="section-heading">
+          <p className="eyebrow">{home.spacesEyebrow}</p>
+          <h2>{home.spacesTitle}</h2>
         </div>
-        <div className="split-copy">
-          <p className="eyebrow">Programming that spans your whole week</p>
-          <h2>Train hard, move well, eat with intention, and recover without leaving the building.</h2>
-          <div className="program-list">
-            {featuredPrograms.map((program) => (
-              <article key={program.name} className="program-card">
-                <span>{program.tag}</span>
-                <h3>{program.name}</h3>
-                <p>{program.description}</p>
-              </article>
-            ))}
-          </div>
+        <div className="home-space-grid">
+          {home.spaces.map((space) => (
+            <article key={space.title} className="gallery-card">
+              <Image src={space.image} alt={space.alt} width={780} height={540} />
+              <h3>{space.title}</h3>
+              <p>{space.description}</p>
+            </article>
+          ))}
         </div>
       </section>
 
       <section className="section-block">
         <div className="section-heading">
-          <p className="eyebrow">Inside ENDO</p>
-          <h2>A space that feels like hospitality first and training second.</h2>
+          <p className="eyebrow">{home.reviewsEyebrow}</p>
+          <h2>{home.reviewsTitle}</h2>
         </div>
-        <div className="gallery-strip">
-          {galleryImages.slice(0, 3).map((image) => (
-            <article key={image.title} className="gallery-card">
-              <Image src={image.src} alt={image.title} width={700} height={520} />
-              <h3>{image.title}</h3>
-              <p>{image.description}</p>
+        <p className="page-hero-copy">{home.reviewsDescription}</p>
+        <div className="review-grid">
+          {home.reviews.map((review) => (
+            <article key={review.name} className="review-card">
+              <p className="review-rating">{review.rating}</p>
+              <p className="review-copy">{review.text}</p>
+              <p className="review-author">{review.name}</p>
             </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="cta-banner">
-        <div>
-          <p className="eyebrow">Membership includes more than access</p>
-          <h2>Expect coaching, conversation, and a place you actually want to spend time in.</h2>
-        </div>
-        <div className="note-list">
-          {clubNotes.map((note) => (
-            <p key={note}>{note}</p>
           ))}
         </div>
       </section>

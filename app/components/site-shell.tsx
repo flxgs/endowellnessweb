@@ -21,11 +21,11 @@ export function SiteShell({ children }: SiteShellProps) {
           <Image
             src="/blue-gradient.svg"
             alt="ENDO logo"
-            width={88}
-            height={88}
+            width={136}
+            height={136}
             className="brand-logo"
             priority
-            sizes="(max-width: 900px) 56px, 72px"
+            sizes="(max-width: 900px) 82px, 112px"
           />
         </Link>
         <nav className="site-nav" aria-label="Primary">
@@ -37,8 +37,8 @@ export function SiteShell({ children }: SiteShellProps) {
         </nav>
         <div className="header-actions">
           <LocaleSwitcher />
-          <Link href="/membership" className="nav-cta">
-            {t("bookVisit")}
+          <Link href="/contacto" className="nav-cta">
+            {t("primaryCta")}
           </Link>
         </div>
       </header>

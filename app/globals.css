@@ -30,6 +30,8 @@
   --space-8: 52px;
   --container-outer: 1420px;
   --container-main: 1240px;
+  --font-display: "Avenir Next", "Avenir", "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
 @theme inline {
@@ -91,7 +93,12 @@ img {
 .membership-card,
 .cta-banner,
 .contact-panel,
-.stat-card {
+.stat-card,
+.review-card,
+.team-card,
+.identity-card,
+.service-card,
+.contact-card {
   border: 1px solid var(--line-soft);
   background: var(--surface);
   backdrop-filter: blur(18px);
@@ -103,10 +110,10 @@ img {
   top: 14px;
   z-index: 30;
   display: grid;
-  grid-template-columns: minmax(170px, 220px) 1fr auto;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: var(--space-5);
-  padding: var(--space-3) var(--space-5);
+  gap: var(--space-4);
+  padding: 14px clamp(14px, 2vw, 24px);
   border-radius: var(--radius-md);
   background: var(--surface-strong);
   background: color-mix(in srgb, var(--surface-strong) 82%, transparent);
@@ -116,22 +123,23 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
+  min-width: max-content;
 }
 
 .brand-logo {
   width: auto;
-  height: clamp(46px, 5vw, 66px);
+  height: clamp(72px, 6.6vw, 102px);
 }
 
 .site-nav {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: 8px;
   min-width: 0;
 }
 
-.site-nav-link,
 .eyebrow,
 .membership-name,
 .session-time,
@@ -143,14 +151,21 @@ img {
 
 .site-nav-link {
   padding: 9px 14px;
+  border: 1px solid transparent;
   border-radius: 999px;
-  color: var(--text-muted);
+  color: var(--text-body);
+  background: color-mix(in srgb, white 58%, transparent);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
   line-height: 1;
-  transition: background-color 180ms ease, color 180ms ease;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
 }
 
 .site-nav-link:hover {
-  background: rgba(255, 255, 255, 0.58);
+  border-color: var(--line-soft);
+  background: rgba(255, 255, 255, 0.82);
   color: var(--text-strong);
 }
 
@@ -179,7 +194,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--space-2);
+  gap: 8px;
 }
 
 .locale-switcher {
@@ -295,6 +310,10 @@ h3,
   line-height: 1.65;
 }
 
+.page-hero-copy {
+  max-width: 72ch;
+}
+
 .hero-actions,
 .contact-actions {
   display: flex;
@@ -385,7 +404,7 @@ h3,
   font-size: clamp(2rem, 3.5vw, 3.3rem);
   line-height: 1.03;
   letter-spacing: -0.03em;
-  max-width: 14ch;
+  max-width: 20ch;
 }
 
 .pillar-grid {
@@ -446,6 +465,217 @@ h3,
 .gallery-strip,
 .membership-grid {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.home-space-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: var(--space-4);
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
+}
+
+.review-card {
+  display: grid;
+  gap: 10px;
+  padding: clamp(18px, 2vw, 24px);
+  border-radius: var(--radius-md);
+}
+
+.review-rating {
+  margin: 0;
+  color: #c08a39;
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+}
+
+.review-copy {
+  margin: 0;
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+.review-author {
+  margin: 0;
+  color: var(--text-strong);
+  font-weight: 700;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.team-card {
+  display: grid;
+  grid-template-columns: minmax(180px, 220px) 1fr;
+  gap: var(--space-4);
+  align-items: stretch;
+  padding: clamp(18px, 2vw, 24px);
+  border-radius: var(--radius-lg);
+}
+
+.team-image {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.team-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+
+.team-copy {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+
+.team-copy h3 {
+  font-size: clamp(1.45rem, 2vw, 1.8rem);
+  line-height: 1.1;
+}
+
+.team-role {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.team-copy p {
+  margin: 0;
+}
+
+.identity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.identity-card {
+  display: grid;
+  gap: var(--space-3);
+  padding: clamp(20px, 2.3vw, 28px);
+  border-radius: var(--radius-lg);
+}
+
+.identity-card h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.3vw, 2rem);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  max-width: none;
+}
+
+.value-grid,
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-4);
+}
+
+.service-card {
+  display: grid;
+  gap: 10px;
+  padding: clamp(18px, 2vw, 24px);
+  border-radius: var(--radius-md);
+}
+
+.service-card h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 1.9vw, 1.7rem);
+  line-height: 1.12;
+}
+
+.service-card p {
+  margin: 0;
+}
+
+.blog-soon {
+  justify-self: start;
+  margin-top: 4px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, white);
+  color: var(--accent-strong);
+  background: var(--accent-soft);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+.contact-card {
+  display: grid;
+  gap: var(--space-3);
+  padding: clamp(20px, 2.3vw, 28px);
+  border-radius: var(--radius-lg);
+}
+
+.contact-list {
+  display: grid;
+  gap: 12px;
+}
+
+.contact-list p {
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.contact-list strong {
+  color: var(--text-strong);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+.contact-list span,
+.contact-list a {
+  color: var(--text-muted);
+}
+
+.contact-list a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 36%, white);
+}
+
+.whatsapp-button {
+  justify-self: start;
+  margin-top: var(--space-1);
+}
+
+.whatsapp-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.78;
+}
+
+.map-frame {
+  min-height: clamp(280px, 42vw, 420px);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #e6eaf1;
+}
+
+.map-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .gallery-card img {
@@ -666,22 +896,40 @@ h3,
   .story-layout,
   .cta-banner,
   .contact-panel,
+  .contact-layout,
+  .identity-grid,
   .site-footer {
     grid-template-columns: 1fr;
   }
 
   .site-header {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "brand actions"
+      "nav nav";
     gap: var(--space-3);
-    justify-items: start;
   }
 
-  .header-actions {
-    justify-content: flex-start;
+  .brand-mark {
+    grid-area: brand;
   }
 
   .site-nav {
+    grid-area: nav;
     justify-content: flex-start;
+  }
+
+  .header-actions {
+    grid-area: actions;
+    justify-content: flex-start;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-card {
+    grid-template-columns: minmax(180px, 240px) 1fr;
   }
 }
 
@@ -691,8 +939,8 @@ h3,
   }
 
   .site-nav-link {
-    font-size: 0.7rem;
-    padding: 8px 12px;
+    font-size: 0.84rem;
+    padding: 8px 11px;
   }
 
   .hero-copy h1 {
@@ -711,7 +959,11 @@ h3,
   .membership-grid,
   .schedule-grid,
   .masonry-grid,
-  .split-gallery {
+  .split-gallery,
+  .home-space-grid,
+  .review-grid,
+  .value-grid,
+  .service-grid {
     grid-template-columns: 1fr;
   }
 
@@ -727,6 +979,14 @@ h3,
 
   .session-meta {
     text-align: left;
+  }
+
+  .team-card {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-logo {
+    height: clamp(80px, 16vw, 100px);
   }
 }
 

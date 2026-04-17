@@ -649,7 +649,6 @@ async function pollLoop() {
     }
   }
 
-  // eslint-disable-next-line no-constant-condition
   while (true) {
     try {
       const updates = await telegramApi("getUpdates", {
@@ -666,7 +665,6 @@ async function pollLoop() {
     } catch (error) {
       const msg = error instanceof Error ? error.message : String(error);
       // Keep process alive on transient network/API errors.
-      // eslint-disable-next-line no-console
       console.error(`[${nowIso()}] Poll error: ${msg}`);
       await new Promise((resolve) => setTimeout(resolve, 1500));
     }
@@ -675,7 +673,6 @@ async function pollLoop() {
 
 pollLoop().catch((error) => {
   const msg = error instanceof Error ? error.message : String(error);
-  // eslint-disable-next-line no-console
   console.error(`Fatal: ${msg}`);
   process.exit(1);
 });

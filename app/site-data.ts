@@ -2,10 +2,12 @@ export const siteName = "ENDO Wellness Club";
 
 export const navLinks = [
   { href: "/", labelKey: "nav.home" },
-  { href: "/about", labelKey: "nav.about" },
-  { href: "/gallery", labelKey: "nav.gallery" },
-  { href: "/schedule", labelKey: "nav.classes" },
-  { href: "/membership", labelKey: "nav.membership" },
+  { href: "/quienes-somos", labelKey: "nav.team" },
+  { href: "/nuestra-finalidad", labelKey: "nav.purpose" },
+  { href: "/servicios", labelKey: "nav.services" },
+  { href: "/blog", labelKey: "nav.blog" },
+  { href: "/contacto", labelKey: "nav.contact" },
+  { href: "/faq", labelKey: "nav.faq" },
 ];
 
 export const pillars = [

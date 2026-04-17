@@ -1,14 +1,16 @@
 {
   "Shell": {
     "homeAriaLabel": "Inicio de ENDO",
-    "bookVisit": "Reservar visita",
-    "footerCopy": "Fuerza, recuperación, movimiento, nutrición y bienestar social bajo un mismo techo.",
+    "primaryCta": "Contacto",
+    "footerCopy": "Entrenamiento, salud y bienestar real bajo un mismo techo.",
     "nav": {
       "home": "Inicio",
-      "about": "Nosotros",
-      "gallery": "Galería",
-      "classes": "Clases",
-      "membership": "Membresía"
+      "team": "Quiénes Somos",
+      "purpose": "Nuestra Finalidad",
+      "services": "Servicios",
+      "blog": "Blog",
+      "contact": "Contacto",
+      "faq": "FAQ"
     }
   },
   "LocaleSwitcher": {
@@ -16,14 +18,239 @@
     "en": "EN",
     "es": "ES"
   },
-  "MembershipPage": {
-    "faqEyebrow": "FAQ · Preguntas frecuentes",
-    "faqTitle": "Todo lo que necesitas saber antes de empezar.",
-    "faqIntro": "No importa si empiezas de cero o vienes con un objetivo concreto: aquí tienes las dudas más comunes resueltas.",
-    "visitEyebrow": "Visita el club",
-    "visitTitle": "Reserva un recorrido, conoce al equipo y entrena un día antes de unirte.",
-    "viewScheduleCta": "Ver horario de clases",
-    "faqItems": [
+  "HomePage": {
+    "heroEyebrow": "ENDO Wellness Club",
+    "heroTitle": "Mucho más que un gimnasio.",
+    "heroDescription": "Entrenamiento, nutrición, fisioterapia y acompañamiento profesional en un espacio pensado para que cuidarte sea sostenible.",
+    "primaryCta": "Ver servicios",
+    "secondaryCta": "Contactar",
+    "heroBadgeTop": "Plazas abiertas",
+    "heroBadgeBottom": "Valoración inicial",
+    "introEyebrow": "Centro multidisciplinar",
+    "introTitle": "No tratamos partes sueltas, trabajamos tu salud como un sistema.",
+    "introDescription": "Cuando cada área se coordina, progresas antes y con más seguridad. Este contenido visual es temporal y se reemplazará por fotos y vídeos reales del centro.",
+    "spacesEyebrow": "Así se vive ENDO",
+    "spacesTitle": "Zona de fuerza, cafetería social y espacios de consulta en una sola experiencia.",
+    "reviewsEyebrow": "Reseñas",
+    "reviewsTitle": "Opiniones reales de personas que ya entrenan con nosotros.",
+    "reviewsDescription": "Módulos de reseñas de Google listos para conectarse con contenido real.",
+    "stats": [
+      {
+        "value": "4+",
+        "label": "Áreas profesionales coordinadas"
+      },
+      {
+        "value": "6",
+        "label": "Personas máximo por grupo"
+      },
+      {
+        "value": "100%",
+        "label": "Programas adaptados a cada caso"
+      }
+    ],
+    "spaces": [
+      {
+        "title": "Zona de entrenamiento",
+        "description": "Máquinas, fuerza y planificación para progresar sin improvisar.",
+        "image": "/wellness-club/strength-floor.png",
+        "alt": "Zona de entrenamiento de fuerza en ENDO"
+      },
+      {
+        "title": "Cafetería y zona social",
+        "description": "Un espacio cómodo para recuperar, conversar y construir hábitos.",
+        "image": "/wellness-club/hero-club.png",
+        "alt": "Zona social y cafetería de ENDO"
+      },
+      {
+        "title": "Consultas de salud",
+        "description": "Atención profesional en nutrición, fisioterapia y otras especialidades.",
+        "image": "/wellness-club/nutrition-lab.png",
+        "alt": "Espacio de consulta profesional en ENDO"
+      }
+    ],
+    "reviews": [
+      {
+        "name": "María L.",
+        "rating": "★★★★★",
+        "text": "He mejorado dolor y rendimiento a la vez. Se nota que todo el equipo trabaja en conjunto."
+      },
+      {
+        "name": "Javier R.",
+        "rating": "★★★★★",
+        "text": "Me apunté sin estar en forma y desde el primer día adaptaron todo a mi nivel."
+      },
+      {
+        "name": "Laura C.",
+        "rating": "★★★★★",
+        "text": "El trato es cercano y profesional. Entrenar aquí me resulta sostenible por horarios y seguimiento."
+      }
+    ]
+  },
+  "TeamPage": {
+    "heroEyebrow": "Quiénes Somos",
+    "heroTitle": "Un equipo multidisciplinar con un objetivo común: tu salud.",
+    "heroDescription": "Presentación inicial del equipo. Sustituiremos textos e imágenes por la versión final de vuestro Word.",
+    "teamTitle": "Equipo ENDO",
+    "teamDescription": "Conoce a las personas que te acompañarán durante todo el proceso.",
+    "pendingNote": "Contenido provisional: a la espera de biografías y fotos definitivas.",
+    "members": [
+      {
+        "name": "Roberto",
+        "role": "Entrenamiento",
+        "bio": "Perfil en edición. Añadiremos aquí su presentación profesional completa.",
+        "image": "/wellness-club/strength-floor.png",
+        "imageAlt": "Retrato provisional de Roberto"
+      },
+      {
+        "name": "Teddy",
+        "role": "Nutrición",
+        "bio": "Perfil en edición. Añadiremos aquí su presentación profesional completa.",
+        "image": "/wellness-club/nutrition-lab.png",
+        "imageAlt": "Retrato provisional de Teddy"
+      },
+      {
+        "name": "Andrés",
+        "role": "Fisioterapia",
+        "bio": "Perfil en edición. Añadiremos aquí su presentación profesional completa.",
+        "image": "/wellness-club/pilates-studio.png",
+        "imageAlt": "Retrato provisional de Andrés"
+      },
+      {
+        "name": "Carlos",
+        "role": "Psicología",
+        "bio": "Perfil en edición. Añadiremos aquí su presentación profesional completa.",
+        "image": "/wellness-club/hero-club.png",
+        "imageAlt": "Retrato provisional de Carlos"
+      }
+    ]
+  },
+  "PurposePage": {
+    "heroEyebrow": "Nuestra Finalidad",
+    "heroTitle": "Misión, visión y valores que guían cada decisión.",
+    "heroDescription": "Base estratégica del centro. Integraremos el texto final de vuestro documento en esta sección.",
+    "missionTitle": "Misión",
+    "missionDescription": "Ayudar a cada persona a mejorar su salud con un enfoque profesional, coordinado y sostenible.",
+    "visionTitle": "Visión",
+    "visionDescription": "Ser el centro de referencia en bienestar multidisciplinar de Bétera y alrededores.",
+    "valuesEyebrow": "Valores",
+    "valuesTitle": "Cómo trabajamos en el día a día.",
+    "values": [
+      {
+        "title": "Rigor profesional",
+        "description": "Tomamos decisiones basadas en evidencia y experiencia clínica."
+      },
+      {
+        "title": "Cercanía",
+        "description": "Acompañamiento humano, comunicación clara y seguimiento continuo."
+      },
+      {
+        "title": "Coordinación real",
+        "description": "Entrenamiento, nutrición, fisioterapia y psicología trabajan como un único equipo."
+      }
+    ]
+  },
+  "ServicesPage": {
+    "heroEyebrow": "Servicios",
+    "heroTitle": "Cada servicio está conectado para que avances con coherencia.",
+    "heroDescription": "Estructura inicial de servicios. En cuanto tengamos el texto definitivo, lo reemplazamos por la versión final.",
+    "sectionEyebrow": "Áreas activas",
+    "sectionTitle": "Servicios visibles en la web",
+    "sectionDescription": "Podología y Medicina Estética quedan preparadas en estructura, pero ocultas por ahora.",
+    "categories": [
+      {
+        "title": "Entrenamiento",
+        "description": "Planificación personalizada, grupos reducidos y sesiones individuales según objetivo."
+      },
+      {
+        "title": "Nutrición",
+        "description": "Estrategias realistas, personalizadas y sostenibles para rendimiento y salud."
+      },
+      {
+        "title": "Fisioterapia",
+        "description": "Valoración, tratamiento y readaptación para lesiones y dolor crónico."
+      },
+      {
+        "title": "Psicología",
+        "description": "Trabajo en motivación, adherencia, gestión del estrés y relación con hábitos."
+      },
+      {
+        "title": "Podología",
+        "description": "Estructura preparada para activar este servicio cuando lo indiquéis.",
+        "hidden": true
+      },
+      {
+        "title": "Medicina Estética",
+        "description": "Estructura preparada para activar este servicio cuando lo indiquéis.",
+        "hidden": true
+      }
+    ]
+  },
+  "BlogPage": {
+    "heroEyebrow": "Blog",
+    "heroTitle": "Contenido práctico por especialidad.",
+    "heroDescription": "Espacio listo para artículos y recursos. Podréis publicar por categorías desde esta estructura.",
+    "categoriesEyebrow": "Categorías",
+    "categoriesTitle": "Secciones de contenido visibles",
+    "categoriesDescription": "Podología y Medicina Estética están preparadas pero ocultas en esta fase.",
+    "emptyState": "Próximamente",
+    "categories": [
+      {
+        "title": "Entrenamiento",
+        "description": "Técnica, progresión, planificación y prevención de lesiones."
+      },
+      {
+        "title": "Nutrición",
+        "description": "Hábitos, rendimiento, composición corporal y recomendaciones prácticas."
+      },
+      {
+        "title": "Fisioterapia",
+        "description": "Recuperación, dolor, movilidad y pautas de readaptación."
+      },
+      {
+        "title": "Psicología",
+        "description": "Motivación, adherencia y herramientas para sostener el proceso."
+      },
+      {
+        "title": "Podología",
+        "description": "Categoría preparada para publicación futura.",
+        "hidden": true
+      },
+      {
+        "title": "Medicina Estética",
+        "description": "Categoría preparada para publicación futura.",
+        "hidden": true
+      }
+    ]
+  },
+  "ContactPage": {
+    "heroEyebrow": "Contacto",
+    "heroTitle": "Estamos en Bétera. Te ayudamos a dar el siguiente paso.",
+    "heroDescription": "Vías de contacto listas. IG, teléfono y WhatsApp se activarán cuando tengamos los datos definitivos.",
+    "infoEyebrow": "Datos de contacto",
+    "infoTitle": "Hablemos",
+    "infoDescription": "Te respondemos por email y en breve por el resto de canales.",
+    "instagramLabel": "Instagram",
+    "instagramValue": "Próximamente",
+    "phoneLabel": "Teléfono",
+    "phoneValue": "Próximamente",
+    "whatsappLabel": "WhatsApp",
+    "whatsappValue": "Próximamente",
+    "whatsappButtonLabel": "Botón de WhatsApp (próximamente)",
+    "mailLabel": "Email",
+    "mailValue": "info@endowellnessclub.es",
+    "addressLabel": "Dirección",
+    "addressValue": "C/ Trinquet 4, (46117) Bétera",
+    "mapEyebrow": "Localización",
+    "mapTitle": "Dónde encontrarnos"
+  },
+  "FaqPage": {
+    "heroEyebrow": "FAQ",
+    "heroTitle": "Preguntas frecuentes",
+    "heroDescription": "Formato desplegable para resolver dudas clave antes de empezar.",
+    "sectionEyebrow": "FAQ · Preguntas frecuentes",
+    "sectionTitle": "Todo lo que necesitas saber antes de empezar.",
+    "sectionIntro": "Diseño tipo acordeón (desplegable) para una lectura rápida y clara.",
+    "items": [
       {
         "question": "¿Qué significa que somos un centro multidisciplinar?",
         "answer": [

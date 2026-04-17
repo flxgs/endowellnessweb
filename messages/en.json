@@ -1,14 +1,16 @@
 {
   "Shell": {
     "homeAriaLabel": "ENDO home",
-    "bookVisit": "Book a Visit",
-    "footerCopy": "Strength, recovery, movement, nutrition, and social wellness under one roof.",
+    "primaryCta": "Contact",
+    "footerCopy": "Training, health, and real wellbeing under one roof.",
     "nav": {
       "home": "Home",
-      "about": "About",
-      "gallery": "Gallery",
-      "classes": "Classes",
-      "membership": "Membership"
+      "team": "Who We Are",
+      "purpose": "Our Purpose",
+      "services": "Services",
+      "blog": "Blog",
+      "contact": "Contact",
+      "faq": "FAQ"
     }
   },
   "LocaleSwitcher": {
@@ -16,14 +18,239 @@
     "en": "EN",
     "es": "ES"
   },
-  "MembershipPage": {
-    "faqEyebrow": "FAQ · Frequently Asked Questions",
-    "faqTitle": "Everything you need to know before you start.",
-    "faqIntro": "Whether you're starting from zero or already training, here are the most common questions answered.",
-    "visitEyebrow": "Visit the club",
-    "visitTitle": "Book a walkthrough, meet the team, and train for a day before joining.",
-    "viewScheduleCta": "See the Class Schedule",
-    "faqItems": [
+  "HomePage": {
+    "heroEyebrow": "ENDO Wellness Club",
+    "heroTitle": "Much more than a gym.",
+    "heroDescription": "Training, nutrition, physiotherapy, and professional guidance in one place designed to make health sustainable.",
+    "primaryCta": "View services",
+    "secondaryCta": "Get in touch",
+    "heroBadgeTop": "Open spots",
+    "heroBadgeBottom": "Initial assessment",
+    "introEyebrow": "Multidisciplinary center",
+    "introTitle": "We do not treat isolated parts, we work on your health as a system.",
+    "introDescription": "When every area is coordinated, progress comes faster and safer. These visuals are temporary and will be replaced with real photos and videos from the center.",
+    "spacesEyebrow": "How ENDO feels",
+    "spacesTitle": "Strength floor, social café area, and health consultations in one experience.",
+    "reviewsEyebrow": "Reviews",
+    "reviewsTitle": "Real feedback from people already training with us.",
+    "reviewsDescription": "Google review modules ready to be connected with real content.",
+    "stats": [
+      {
+        "value": "4+",
+        "label": "Coordinated professional areas"
+      },
+      {
+        "value": "6",
+        "label": "People max per group"
+      },
+      {
+        "value": "100%",
+        "label": "Programs adapted to each case"
+      }
+    ],
+    "spaces": [
+      {
+        "title": "Training zone",
+        "description": "Machines, strength work, and planning designed for steady progress.",
+        "image": "/wellness-club/strength-floor.png",
+        "alt": "Strength training zone at ENDO"
+      },
+      {
+        "title": "Café and social area",
+        "description": "A comfortable space to recover, connect, and build lasting habits.",
+        "image": "/wellness-club/hero-club.png",
+        "alt": "Social and café area at ENDO"
+      },
+      {
+        "title": "Health consultations",
+        "description": "Professional support in nutrition, physiotherapy, and other specialties.",
+        "image": "/wellness-club/nutrition-lab.png",
+        "alt": "Professional consultation space at ENDO"
+      }
+    ],
+    "reviews": [
+      {
+        "name": "Maria L.",
+        "rating": "★★★★★",
+        "text": "I improved pain and performance at the same time. You can tell the team works together."
+      },
+      {
+        "name": "Javier R.",
+        "rating": "★★★★★",
+        "text": "I joined while out of shape and from day one they adapted everything to my level."
+      },
+      {
+        "name": "Laura C.",
+        "rating": "★★★★★",
+        "text": "Close and professional support. Training here fits my schedule and keeps me consistent."
+      }
+    ]
+  },
+  "TeamPage": {
+    "heroEyebrow": "Who We Are",
+    "heroTitle": "A multidisciplinary team with one shared goal: your health.",
+    "heroDescription": "Initial team presentation. We will replace copy and photos with the final version from your Word document.",
+    "teamTitle": "ENDO Team",
+    "teamDescription": "Meet the people who will guide you through the full process.",
+    "pendingNote": "Temporary content: waiting for final bios and portraits.",
+    "members": [
+      {
+        "name": "Roberto",
+        "role": "Training",
+        "bio": "Profile in progress. Full professional introduction will be added here.",
+        "image": "/wellness-club/strength-floor.png",
+        "imageAlt": "Temporary portrait for Roberto"
+      },
+      {
+        "name": "Teddy",
+        "role": "Nutrition",
+        "bio": "Profile in progress. Full professional introduction will be added here.",
+        "image": "/wellness-club/nutrition-lab.png",
+        "imageAlt": "Temporary portrait for Teddy"
+      },
+      {
+        "name": "Andres",
+        "role": "Physiotherapy",
+        "bio": "Profile in progress. Full professional introduction will be added here.",
+        "image": "/wellness-club/pilates-studio.png",
+        "imageAlt": "Temporary portrait for Andres"
+      },
+      {
+        "name": "Carlos",
+        "role": "Psychology",
+        "bio": "Profile in progress. Full professional introduction will be added here.",
+        "image": "/wellness-club/hero-club.png",
+        "imageAlt": "Temporary portrait for Carlos"
+      }
+    ]
+  },
+  "PurposePage": {
+    "heroEyebrow": "Our Purpose",
+    "heroTitle": "Mission, vision, and values behind every decision.",
+    "heroDescription": "Strategic foundation of the center. We will replace this block with your final document text.",
+    "missionTitle": "Mission",
+    "missionDescription": "Help every person improve health through a professional, coordinated, and sustainable approach.",
+    "visionTitle": "Vision",
+    "visionDescription": "Become the benchmark multidisciplinary wellness center in Bétera and nearby areas.",
+    "valuesEyebrow": "Values",
+    "valuesTitle": "How we work every day.",
+    "values": [
+      {
+        "title": "Professional rigor",
+        "description": "Decisions based on evidence and clinical experience."
+      },
+      {
+        "title": "Closeness",
+        "description": "Human support, clear communication, and continuous follow-up."
+      },
+      {
+        "title": "True coordination",
+        "description": "Training, nutrition, physiotherapy, and psychology working as one team."
+      }
+    ]
+  },
+  "ServicesPage": {
+    "heroEyebrow": "Services",
+    "heroTitle": "Each service is connected so your progress stays coherent.",
+    "heroDescription": "Initial service structure. Once we receive your final copy, we will replace this with the final version.",
+    "sectionEyebrow": "Active areas",
+    "sectionTitle": "Services visible on the website",
+    "sectionDescription": "Podiatry and Aesthetic Medicine are prepared in structure but currently hidden.",
+    "categories": [
+      {
+        "title": "Training",
+        "description": "Personal planning, small groups, and one-to-one sessions based on your goals."
+      },
+      {
+        "title": "Nutrition",
+        "description": "Realistic, personalized, and sustainable strategies for health and performance."
+      },
+      {
+        "title": "Physiotherapy",
+        "description": "Assessment, treatment, and return-to-training support for injury and chronic pain."
+      },
+      {
+        "title": "Psychology",
+        "description": "Motivation, adherence, stress management, and behavior-change support."
+      },
+      {
+        "title": "Podiatry",
+        "description": "Structure ready to activate this service when requested.",
+        "hidden": true
+      },
+      {
+        "title": "Aesthetic Medicine",
+        "description": "Structure ready to activate this service when requested.",
+        "hidden": true
+      }
+    ]
+  },
+  "BlogPage": {
+    "heroEyebrow": "Blog",
+    "heroTitle": "Practical content by specialty.",
+    "heroDescription": "Space ready for articles and resources. You will be able to publish by category from this structure.",
+    "categoriesEyebrow": "Categories",
+    "categoriesTitle": "Visible content sections",
+    "categoriesDescription": "Podiatry and Aesthetic Medicine are prepared but hidden at this stage.",
+    "emptyState": "Coming soon",
+    "categories": [
+      {
+        "title": "Training",
+        "description": "Technique, progression, planning, and injury prevention."
+      },
+      {
+        "title": "Nutrition",
+        "description": "Habits, performance, body composition, and practical guidance."
+      },
+      {
+        "title": "Physiotherapy",
+        "description": "Recovery, pain management, mobility, and return-to-training guidance."
+      },
+      {
+        "title": "Psychology",
+        "description": "Motivation, adherence, and tools to sustain long-term progress."
+      },
+      {
+        "title": "Podiatry",
+        "description": "Category prepared for future publication.",
+        "hidden": true
+      },
+      {
+        "title": "Aesthetic Medicine",
+        "description": "Category prepared for future publication.",
+        "hidden": true
+      }
+    ]
+  },
+  "ContactPage": {
+    "heroEyebrow": "Contact",
+    "heroTitle": "We are in Bétera. Let’s plan your next step.",
+    "heroDescription": "Contact channels are ready. IG, phone, and WhatsApp will be activated once final details are available.",
+    "infoEyebrow": "Contact details",
+    "infoTitle": "Let’s talk",
+    "infoDescription": "We currently reply by email and will soon open the rest of the channels.",
+    "instagramLabel": "Instagram",
+    "instagramValue": "Coming soon",
+    "phoneLabel": "Phone",
+    "phoneValue": "Coming soon",
+    "whatsappLabel": "WhatsApp",
+    "whatsappValue": "Coming soon",
+    "whatsappButtonLabel": "WhatsApp button (coming soon)",
+    "mailLabel": "Email",
+    "mailValue": "info@endowellnessclub.es",
+    "addressLabel": "Address",
+    "addressValue": "C/ Trinquet 4, (46117) Bétera",
+    "mapEyebrow": "Location",
+    "mapTitle": "Where to find us"
+  },
+  "FaqPage": {
+    "heroEyebrow": "FAQ",
+    "heroTitle": "Frequently Asked Questions",
+    "heroDescription": "Accordion-style format for fast and clear answers.",
+    "sectionEyebrow": "FAQ · Frequently Asked Questions",
+    "sectionTitle": "Everything you need to know before starting.",
+    "sectionIntro": "Expandable accordion layout for quick reading and easy navigation.",
+    "items": [
       {
         "question": "What does it mean that we are a multidisciplinary center?",
         "answer": [

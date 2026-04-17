@@ -990,7 +990,6 @@ export async function POST(request: Request): Promise<Response> {
       await processUpdate(cfg, update);
     } catch (error) {
       const msg = error instanceof Error ? error.message : String(error);
-      // eslint-disable-next-line no-console
       console.error(`Webhook processing error: ${msg}`);
       if (update.message?.chat?.id) {
         try {

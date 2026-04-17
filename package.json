@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run i18n:check && next build",
+    "build": "npm run i18n:check && next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "i18n:check": "node scripts/check-i18n-keys.mjs",
