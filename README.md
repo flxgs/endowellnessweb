@@ -11,6 +11,14 @@ npm run dev
 
 Open `http://localhost:3000`.
 
+## LLM UI standards
+
+This repo enforces `shadcn + Tailwind` for UI work.
+
+- Agent rule entrypoint: `AGENTS.md`
+- UI standards doc: `docs/shadcn-ui-standards.md`
+- Reusable skill: `skills/shadcn-ui/SKILL.md`
+
 ## Localization (next-intl)
 
 This app uses `next-intl` with locale-based routing (`/en/*`, `/es/*`).

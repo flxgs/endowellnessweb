@@ -1,3 +1,6 @@
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Card, CardContent } from "@/components/ui/card";
+
 export type FaqItem = {
   question: string;
   answer: string[];
@@ -18,31 +21,45 @@ export function FaqSection({
   intro,
 }: FaqSectionProps) {
   return (
-    <section className="section-block faq-section">
-      <div className="section-heading faq-heading">
-        <p className="eyebrow">{eyebrow}</p>
-        <h2>{title}</h2>
-        {intro ? <p className="page-hero-copy">{intro}</p> : null}
+    <section className="space-y-5">
+      <div className="space-y-2">
+        <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">{eyebrow}</p>
+        <h2 className="max-w-[22ch] text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
+          {title}
+        </h2>
+        {intro ? <p className="max-w-4xl text-base leading-relaxed text-muted-foreground">{intro}</p> : null}
       </div>
-      <div className="faq-list">
-        {items.map((item) => (
-          <details key={item.question} className="faq-item">
-            <summary>{item.question}</summary>
-            <div className="faq-answer">
-              {item.answer.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-              {item.bullets?.length ? (
-                <ul className="faq-bullets">
-                  {item.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-              ) : null}
-            </div>
-          </details>
-        ))}
-      </div>
+      <Card className="border-border/70 bg-card/85 py-0 shadow-sm">
+        <CardContent className="p-2 sm:p-3">
+          <Accordion multiple className="w-full">
+            {items.map((item, index) => (
+              <AccordionItem
+                key={item.question}
+                value={`item-${index}`}
+                className="border-b border-border/70 px-3 py-1 last:border-b-0 sm:px-4"
+              >
+                <AccordionTrigger className="py-4 text-base leading-snug font-semibold text-foreground hover:no-underline">
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent className="pb-4 text-base leading-relaxed text-muted-foreground">
+                  <div className="space-y-3">
+                    {item.answer.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                    {item.bullets?.length ? (
+                      <ul className="list-disc space-y-2 pl-5">
+                        {item.bullets.map((bullet) => (
+                          <li key={bullet}>{bullet}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </CardContent>
+      </Card>
     </section>
   );
 }

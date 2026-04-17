@@ -1,7 +1,10 @@
 import Image from "next/image";
 import { getMessages } from "next-intl/server";
 
+import { buttonVariants } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "@/i18n/navigation";
+import { cn } from "@/lib/utils";
 
 type HomeSpace = {
   title: string;
@@ -45,83 +48,130 @@ type HomePageMessages = {
 export default async function Home() {
   const messages = (await getMessages()) as { HomePage: HomePageMessages };
   const home = messages.HomePage;
+  const primaryActionClassName = cn(
+    buttonVariants({ variant: "default", size: "lg" }),
+    "h-10 rounded-full px-4 text-sm font-semibold",
+  );
+  const secondaryActionClassName = cn(
+    buttonVariants({ variant: "outline", size: "lg" }),
+    "h-10 rounded-full px-4 text-sm font-semibold",
+  );
 
   return (
-    <div className="page-stack">
-      <section className="hero-grid">
-        <div className="hero-copy">
-          <p className="eyebrow">{home.heroEyebrow}</p>
-          <h1>{home.heroTitle}</h1>
-          <p className="hero-text">{home.heroDescription}</p>
-          <div className="hero-actions">
-            <Link href="/servicios" className="primary-button">
-              {home.primaryCta}
-            </Link>
-            <Link href="/contacto" className="secondary-button">
-              {home.secondaryCta}
-            </Link>
+    <div className="space-y-10">
+      <section className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
+        <Card className="border-border/70 bg-card/85 shadow-sm">
+          <CardContent className="space-y-6 p-6 sm:p-8">
+            <div className="space-y-3">
+              <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">
+                {home.heroEyebrow}
+              </p>
+              <h1 className="max-w-[11ch] text-4xl leading-[0.96] font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+                {home.heroTitle}
+              </h1>
+              <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">{home.heroDescription}</p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/servicios" className={primaryActionClassName}>
+                {home.primaryCta}
+              </Link>
+              <Link href="/contacto" className={secondaryActionClassName}>
+                {home.secondaryCta}
+              </Link>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {home.stats.map((stat) => (
+                <Card key={stat.label} size="sm" className="border-border/70 bg-background/70 py-0 shadow-none">
+                  <CardContent className="space-y-1 p-4">
+                    <p className="text-3xl leading-none font-semibold tracking-tight text-foreground">
+                      {stat.value}
+                    </p>
+                    <p className="text-sm leading-snug text-muted-foreground">{stat.label}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="overflow-hidden border-border/70 bg-card/85 py-0 shadow-sm">
+          <div className="relative aspect-[4/5]">
+            <Image
+              src="/wellness-club/hero-club.png"
+              alt="Interior view of a premium wellness club with lounge and training areas"
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 42vw"
+            />
+            <div className="absolute right-4 bottom-4 rounded-xl border border-border/80 bg-background/90 px-4 py-3 shadow-sm backdrop-blur">
+              <p className="text-[0.68rem] font-semibold tracking-[0.14em] text-muted-foreground uppercase">
+                {home.heroBadgeTop}
+              </p>
+              <p className="text-sm font-semibold text-foreground">{home.heroBadgeBottom}</p>
+            </div>
           </div>
-          <div className="stats-grid">
-            {home.stats.map((stat) => (
-              <div key={stat.label} className="stat-card">
-                <strong>{stat.value}</strong>
-                <span>{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="hero-visual">
-          <Image
-            src="/wellness-club/hero-club.png"
-            alt="Interior view of a premium wellness club with lounge and training areas"
-            width={960}
-            height={1200}
-            priority
-          />
-          <div className="hero-badge">
-            <span>{home.heroBadgeTop}</span>
-            <strong>{home.heroBadgeBottom}</strong>
-          </div>
-        </div>
+        </Card>
       </section>
 
-      <section className="section-block">
-        <div className="section-heading">
-          <p className="eyebrow">{home.introEyebrow}</p>
-          <h2>{home.introTitle}</h2>
+      <section className="space-y-4">
+        <div className="space-y-2">
+          <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">
+            {home.introEyebrow}
+          </p>
+          <h2 className="max-w-[20ch] text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
+            {home.introTitle}
+          </h2>
         </div>
-        <p className="page-hero-copy">{home.introDescription}</p>
+        <Card className="border-border/70 bg-card/85 shadow-sm">
+          <CardContent className="p-6 sm:p-7">
+            <p className="max-w-4xl text-base leading-relaxed text-muted-foreground">{home.introDescription}</p>
+          </CardContent>
+        </Card>
       </section>
 
-      <section className="section-block">
-        <div className="section-heading">
-          <p className="eyebrow">{home.spacesEyebrow}</p>
-          <h2>{home.spacesTitle}</h2>
+      <section className="space-y-5">
+        <div className="space-y-2">
+          <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">
+            {home.spacesEyebrow}
+          </p>
+          <h2 className="max-w-[20ch] text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
+            {home.spacesTitle}
+          </h2>
         </div>
-        <div className="home-space-grid">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {home.spaces.map((space) => (
-            <article key={space.title} className="gallery-card">
-              <Image src={space.image} alt={space.alt} width={780} height={540} />
-              <h3>{space.title}</h3>
-              <p>{space.description}</p>
-            </article>
+            <Card key={space.title} className="overflow-hidden border-border/70 bg-card/85 py-0 shadow-sm">
+              <div className="relative aspect-[4/3]">
+                <Image src={space.image} alt={space.alt} fill className="object-cover" sizes="(max-width: 1280px) 100vw, 28vw" />
+              </div>
+              <CardHeader className="space-y-2">
+                <CardTitle className="text-xl leading-tight text-foreground">{space.title}</CardTitle>
+                <CardDescription className="text-base leading-relaxed">{space.description}</CardDescription>
+              </CardHeader>
+            </Card>
           ))}
         </div>
       </section>
 
-      <section className="section-block">
-        <div className="section-heading">
-          <p className="eyebrow">{home.reviewsEyebrow}</p>
-          <h2>{home.reviewsTitle}</h2>
+      <section className="space-y-5">
+        <div className="space-y-2">
+          <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">
+            {home.reviewsEyebrow}
+          </p>
+          <h2 className="max-w-[20ch] text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
+            {home.reviewsTitle}
+          </h2>
         </div>
-        <p className="page-hero-copy">{home.reviewsDescription}</p>
-        <div className="review-grid">
+        <p className="max-w-4xl text-base leading-relaxed text-muted-foreground">{home.reviewsDescription}</p>
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {home.reviews.map((review) => (
-            <article key={review.name} className="review-card">
-              <p className="review-rating">{review.rating}</p>
-              <p className="review-copy">{review.text}</p>
-              <p className="review-author">{review.name}</p>
-            </article>
+            <Card key={review.name} className="border-border/70 bg-card/85 shadow-sm">
+              <CardHeader className="space-y-2">
+                <p className="text-sm font-semibold tracking-[0.08em] text-amber-600">{review.rating}</p>
+                <CardDescription className="text-base leading-relaxed text-foreground/80">{review.text}</CardDescription>
+                <CardTitle className="text-base font-semibold text-foreground">{review.name}</CardTitle>
+              </CardHeader>
+            </Card>
           ))}
         </div>
       </section>
