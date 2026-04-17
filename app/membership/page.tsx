@@ -1,7 +1,8 @@
 import Link from "next/link";
 
+import { FaqSection } from "../components/faq-section";
 import { PageHero } from "../components/page-hero";
-import { membershipTiers } from "../site-data";
+import { frequentlyAskedQuestions, membershipTiers } from "../site-data";
 
 export default function MembershipPage() {
   return (
@@ -29,6 +30,13 @@ export default function MembershipPage() {
           </article>
         ))}
       </section>
+
+      <FaqSection
+        items={frequentlyAskedQuestions}
+        eyebrow="FAQ · Preguntas frecuentes"
+        title="Todo lo que necesitas saber antes de empezar."
+        intro="No importa si empiezas de cero o vienes con un objetivo concreto: aquí tienes las dudas más comunes resueltas."
+      />
 
       <section className="contact-panel">
         <div>
