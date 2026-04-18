@@ -1,9 +1,10 @@
 import { getMessages } from "next-intl/server";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { PageHero } from "../../components/page-hero";
+import { SectionHeader } from "../../components/section-header";
 
 type ContactPageMessages = {
   heroEyebrow: string;
@@ -32,7 +33,7 @@ export default async function ContactoPage() {
   const contact = messages.ContactPage;
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-12">
       <PageHero
         eyebrow={contact.heroEyebrow}
         title={contact.heroTitle}
@@ -40,38 +41,38 @@ export default async function ContactoPage() {
       />
 
       <section className="grid gap-4 lg:grid-cols-2">
-        <Card className="border-border/70 bg-card/85 shadow-sm">
-          <CardHeader className="space-y-3">
-            <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">
-              {contact.infoEyebrow}
-            </p>
-            <CardTitle className="text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
-              {contact.infoTitle}
-            </CardTitle>
-            <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">{contact.infoDescription}</p>
+        <Card className="border-border/80 bg-card shadow-none">
+          <CardHeader>
+            <SectionHeader
+              eyebrow={contact.infoEyebrow}
+              title={contact.infoTitle}
+              description={contact.infoDescription}
+              className="space-y-3"
+              titleClassName="text-3xl sm:text-4xl"
+            />
           </CardHeader>
           <CardContent className="space-y-6">
             <dl className="space-y-4">
               <div className="grid gap-1">
-                <dt className="text-xs font-semibold tracking-[0.1em] text-muted-foreground uppercase">
+                <dt className="text-xs font-semibold tracking-[0.1em] text-primary/80 uppercase">
                   {contact.instagramLabel}
                 </dt>
                 <dd className="text-base text-foreground/85">{contact.instagramValue}</dd>
               </div>
               <div className="grid gap-1">
-                <dt className="text-xs font-semibold tracking-[0.1em] text-muted-foreground uppercase">
+                <dt className="text-xs font-semibold tracking-[0.1em] text-primary/80 uppercase">
                   {contact.phoneLabel}
                 </dt>
                 <dd className="text-base text-foreground/85">{contact.phoneValue}</dd>
               </div>
               <div className="grid gap-1">
-                <dt className="text-xs font-semibold tracking-[0.1em] text-muted-foreground uppercase">
+                <dt className="text-xs font-semibold tracking-[0.1em] text-primary/80 uppercase">
                   {contact.whatsappLabel}
                 </dt>
                 <dd className="text-base text-foreground/85">{contact.whatsappValue}</dd>
               </div>
               <div className="grid gap-1">
-                <dt className="text-xs font-semibold tracking-[0.1em] text-muted-foreground uppercase">
+                <dt className="text-xs font-semibold tracking-[0.1em] text-primary/80 uppercase">
                   {contact.mailLabel}
                 </dt>
                 <dd className="text-base text-foreground/85">
@@ -84,26 +85,26 @@ export default async function ContactoPage() {
                 </dd>
               </div>
               <div className="grid gap-1">
-                <dt className="text-xs font-semibold tracking-[0.1em] text-muted-foreground uppercase">
+                <dt className="text-xs font-semibold tracking-[0.1em] text-primary/80 uppercase">
                   {contact.addressLabel}
                 </dt>
                 <dd className="text-base text-foreground/85">{contact.addressValue}</dd>
               </div>
             </dl>
-            <Button type="button" variant="outline" disabled className="w-fit rounded-full px-4">
+            <Button type="button" variant="outline" disabled className="w-fit rounded-full px-4 shadow-none">
               {contact.whatsappButtonLabel}
             </Button>
           </CardContent>
         </Card>
 
-        <Card className="border-border/70 bg-card/85 shadow-sm">
-          <CardHeader className="space-y-3">
-            <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">
-              {contact.mapEyebrow}
-            </p>
-            <CardTitle className="text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
-              {contact.mapTitle}
-            </CardTitle>
+        <Card className="border-border/80 bg-card shadow-none">
+          <CardHeader>
+            <SectionHeader
+              eyebrow={contact.mapEyebrow}
+              title={contact.mapTitle}
+              className="space-y-3"
+              titleClassName="text-3xl sm:text-4xl"
+            />
           </CardHeader>
           <CardContent>
             <div className="overflow-hidden rounded-xl border border-border/70 bg-muted">

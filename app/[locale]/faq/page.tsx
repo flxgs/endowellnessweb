@@ -33,7 +33,7 @@ export default async function FaqPage() {
   const items = extractFaqItems(messages);
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-12">
       <PageHero eyebrow={t("heroEyebrow")} title={t("heroTitle")} description={t("heroDescription")} />
       <FaqSection
         items={items}

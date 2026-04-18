@@ -5,6 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
+import { SectionHeader } from "../components/section-header";
 
 type HomeSpace = {
   title: string;
@@ -50,7 +51,7 @@ export default async function Home() {
   const home = messages.HomePage;
   const primaryActionClassName = cn(
     buttonVariants({ variant: "default", size: "lg" }),
-    "h-10 rounded-full px-4 text-sm font-semibold",
+    "h-10 rounded-full px-4 text-sm font-semibold shadow-none",
   );
   const secondaryActionClassName = cn(
     buttonVariants({ variant: "outline", size: "lg" }),
@@ -58,42 +59,34 @@ export default async function Home() {
   );
 
   return (
-    <div className="space-y-10">
-      <section className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
-        <Card className="border-border/70 bg-card/85 shadow-sm">
-          <CardContent className="space-y-6 p-6 sm:p-8">
-            <div className="space-y-3">
-              <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">
-                {home.heroEyebrow}
-              </p>
-              <h1 className="max-w-[11ch] text-4xl leading-[0.96] font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-                {home.heroTitle}
-              </h1>
-              <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">{home.heroDescription}</p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/servicios" className={primaryActionClassName}>
-                {home.primaryCta}
-              </Link>
-              <Link href="/contacto" className={secondaryActionClassName}>
-                {home.secondaryCta}
-              </Link>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {home.stats.map((stat) => (
-                <Card key={stat.label} size="sm" className="border-border/70 bg-background/70 py-0 shadow-none">
-                  <CardContent className="space-y-1 p-4">
-                    <p className="text-3xl leading-none font-semibold tracking-tight text-foreground">
-                      {stat.value}
-                    </p>
-                    <p className="text-sm leading-snug text-muted-foreground">{stat.label}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="overflow-hidden border-border/70 bg-card/85 py-0 shadow-sm">
+    <div className="space-y-14">
+      <section className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:items-center">
+        <div className="space-y-6">
+          <div className="space-y-3">
+            <p className="text-xs font-semibold tracking-[0.14em] text-primary/80 uppercase">{home.heroEyebrow}</p>
+            <h1 className="max-w-[12ch] text-4xl leading-tight font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              {home.heroTitle}
+            </h1>
+            <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">{home.heroDescription}</p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/servicios" className={primaryActionClassName}>
+              {home.primaryCta}
+            </Link>
+            <Link href="/contacto" className={secondaryActionClassName}>
+              {home.secondaryCta}
+            </Link>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {home.stats.map((stat) => (
+              <div key={stat.label} className="rounded-lg border border-border/80 bg-card p-4">
+                <p className="text-3xl leading-none font-semibold tracking-tight text-foreground">{stat.value}</p>
+                <p className="mt-1 text-sm leading-snug text-muted-foreground">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="relative overflow-hidden rounded-xl border border-border/80 bg-card">
           <div className="relative aspect-[4/5]">
             <Image
               src="/wellness-club/hero-club.png"
@@ -103,74 +96,53 @@ export default async function Home() {
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 42vw"
             />
-            <div className="absolute right-4 bottom-4 rounded-xl border border-border/80 bg-background/90 px-4 py-3 shadow-sm backdrop-blur">
+            <div className="absolute right-4 bottom-4 rounded-lg bg-background/95 px-3 py-2">
               <p className="text-[0.68rem] font-semibold tracking-[0.14em] text-muted-foreground uppercase">
                 {home.heroBadgeTop}
               </p>
               <p className="text-sm font-semibold text-foreground">{home.heroBadgeBottom}</p>
             </div>
           </div>
-        </Card>
+        </div>
       </section>
 
       <section className="space-y-4">
-        <div className="space-y-2">
-          <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">
-            {home.introEyebrow}
-          </p>
-          <h2 className="max-w-[20ch] text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
-            {home.introTitle}
-          </h2>
-        </div>
-        <Card className="border-border/70 bg-card/85 shadow-sm">
-          <CardContent className="p-6 sm:p-7">
-            <p className="max-w-4xl text-base leading-relaxed text-muted-foreground">{home.introDescription}</p>
-          </CardContent>
-        </Card>
+        <SectionHeader eyebrow={home.introEyebrow} title={home.introTitle} description={home.introDescription} />
       </section>
 
-      <section className="space-y-5">
-        <div className="space-y-2">
-          <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">
-            {home.spacesEyebrow}
-          </p>
-          <h2 className="max-w-[20ch] text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
-            {home.spacesTitle}
-          </h2>
-        </div>
+      <section className="space-y-6">
+        <SectionHeader eyebrow={home.spacesEyebrow} title={home.spacesTitle} />
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {home.spaces.map((space) => (
-            <Card key={space.title} className="overflow-hidden border-border/70 bg-card/85 py-0 shadow-sm">
+            <Card key={space.title} className="overflow-hidden border-border/80 bg-card py-0 shadow-none">
               <div className="relative aspect-[4/3]">
-                <Image src={space.image} alt={space.alt} fill className="object-cover" sizes="(max-width: 1280px) 100vw, 28vw" />
+                <Image
+                  src={space.image}
+                  alt={space.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1280px) 100vw, 28vw"
+                />
               </div>
-              <CardHeader className="space-y-2">
+              <CardHeader className="space-y-1.5">
                 <CardTitle className="text-xl leading-tight text-foreground">{space.title}</CardTitle>
-                <CardDescription className="text-base leading-relaxed">{space.description}</CardDescription>
+                <CardDescription className="text-sm leading-relaxed">{space.description}</CardDescription>
               </CardHeader>
             </Card>
           ))}
         </div>
       </section>
 
-      <section className="space-y-5">
-        <div className="space-y-2">
-          <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">
-            {home.reviewsEyebrow}
-          </p>
-          <h2 className="max-w-[20ch] text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
-            {home.reviewsTitle}
-          </h2>
-        </div>
-        <p className="max-w-4xl text-base leading-relaxed text-muted-foreground">{home.reviewsDescription}</p>
+      <section className="space-y-6">
+        <SectionHeader eyebrow={home.reviewsEyebrow} title={home.reviewsTitle} description={home.reviewsDescription} />
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {home.reviews.map((review) => (
-            <Card key={review.name} className="border-border/70 bg-card/85 shadow-sm">
-              <CardHeader className="space-y-2">
-                <p className="text-sm font-semibold tracking-[0.08em] text-amber-600">{review.rating}</p>
-                <CardDescription className="text-base leading-relaxed text-foreground/80">{review.text}</CardDescription>
-                <CardTitle className="text-base font-semibold text-foreground">{review.name}</CardTitle>
-              </CardHeader>
+            <Card key={review.name} className="border-border/80 bg-card shadow-none">
+              <CardContent className="space-y-3 p-5">
+                <p className="text-sm font-semibold tracking-[0.08em] text-primary">{review.rating}</p>
+                <p className="text-base leading-relaxed text-foreground/85">“{review.text}”</p>
+                <p className="text-sm font-semibold text-foreground">{review.name}</p>
+              </CardContent>
             </Card>
           ))}
         </div>

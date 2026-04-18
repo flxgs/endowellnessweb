@@ -1,5 +1,6 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
+import { SectionHeader } from "./section-header";
 
 export type FaqItem = {
   question: string;
@@ -21,22 +22,16 @@ export function FaqSection({
   intro,
 }: FaqSectionProps) {
   return (
-    <section className="space-y-5">
-      <div className="space-y-2">
-        <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">{eyebrow}</p>
-        <h2 className="max-w-[22ch] text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl">
-          {title}
-        </h2>
-        {intro ? <p className="max-w-4xl text-base leading-relaxed text-muted-foreground">{intro}</p> : null}
-      </div>
-      <Card className="border-border/70 bg-card/85 py-0 shadow-sm">
-        <CardContent className="p-2 sm:p-3">
+    <section className="space-y-6">
+      <SectionHeader eyebrow={eyebrow} title={title} description={intro} />
+      <Card className="border-border/80 bg-card py-0 shadow-none">
+        <CardContent className="p-3 sm:p-4">
           <Accordion multiple className="w-full">
             {items.map((item, index) => (
               <AccordionItem
                 key={item.question}
                 value={`item-${index}`}
-                className="border-b border-border/70 px-3 py-1 last:border-b-0 sm:px-4"
+                className="border-b border-border/80 px-2 py-1 last:border-b-0 sm:px-3"
               >
                 <AccordionTrigger className="py-4 text-base leading-snug font-semibold text-foreground hover:no-underline">
                   {item.question}
