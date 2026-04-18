@@ -1,6 +1,10 @@
 import { getMessages } from "next-intl/server";
 
+import { Badge } from "@/components/ui/badge";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { PageHero } from "../../components/page-hero";
+import { SectionHeader } from "../../components/section-header";
 
 type BlogCategory = {
   title: string;
@@ -25,22 +29,26 @@ export default async function BlogPage() {
   const visibleCategories = blog.categories.filter((category) => !category.hidden);
 
   return (
-    <div className="page-stack">
+    <div className="space-y-12">
       <PageHero eyebrow={blog.heroEyebrow} title={blog.heroTitle} description={blog.heroDescription} />
 
-      <section className="section-block">
-        <div className="section-heading">
-          <p className="eyebrow">{blog.categoriesEyebrow}</p>
-          <h2>{blog.categoriesTitle}</h2>
-        </div>
-        <p className="page-hero-copy">{blog.categoriesDescription}</p>
-        <div className="service-grid">
+      <section className="space-y-6">
+        <SectionHeader
+          eyebrow={blog.categoriesEyebrow}
+          title={blog.categoriesTitle}
+          description={blog.categoriesDescription}
+        />
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {visibleCategories.map((category) => (
-            <article key={category.title} className="service-card">
-              <h3>{category.title}</h3>
-              <p>{category.description}</p>
-              <p className="blog-soon">{blog.emptyState}</p>
-            </article>
+            <Card key={category.title} className="border-border/80 bg-card shadow-none">
+              <CardHeader className="space-y-2">
+                <CardTitle className="text-2xl leading-tight text-foreground">{category.title}</CardTitle>
+                <CardDescription className="text-sm leading-relaxed">{category.description}</CardDescription>
+                <Badge variant="secondary" className="w-fit rounded-full px-3 py-1 font-medium">
+                  {blog.emptyState}
+                </Badge>
+              </CardHeader>
+            </Card>
           ))}
         </div>
       </section>

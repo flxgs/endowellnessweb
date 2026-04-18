@@ -1,6 +1,9 @@
 import { getMessages } from "next-intl/server";
 
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { PageHero } from "../../components/page-hero";
+import { SectionHeader } from "../../components/section-header";
 
 type ServiceCategory = {
   title: string;
@@ -24,25 +27,27 @@ export default async function ServiciosPage() {
   const visibleCategories = services.categories.filter((category) => !category.hidden);
 
   return (
-    <div className="page-stack">
+    <div className="space-y-12">
       <PageHero
         eyebrow={services.heroEyebrow}
         title={services.heroTitle}
         description={services.heroDescription}
       />
 
-      <section className="section-block">
-        <div className="section-heading">
-          <p className="eyebrow">{services.sectionEyebrow}</p>
-          <h2>{services.sectionTitle}</h2>
-        </div>
-        <p className="page-hero-copy">{services.sectionDescription}</p>
-        <div className="service-grid">
+      <section className="space-y-6">
+        <SectionHeader
+          eyebrow={services.sectionEyebrow}
+          title={services.sectionTitle}
+          description={services.sectionDescription}
+        />
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {visibleCategories.map((category) => (
-            <article key={category.title} className="service-card">
-              <h3>{category.title}</h3>
-              <p>{category.description}</p>
-            </article>
+            <Card key={category.title} className="border-border/80 bg-card shadow-none">
+              <CardHeader className="space-y-1.5">
+                <CardTitle className="text-2xl leading-tight text-foreground">{category.title}</CardTitle>
+                <CardDescription className="text-sm leading-relaxed">{category.description}</CardDescription>
+              </CardHeader>
+            </Card>
           ))}
         </div>
       </section>

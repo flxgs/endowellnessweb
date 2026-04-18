@@ -1,6 +1,9 @@
 import { getMessages } from "next-intl/server";
 
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { PageHero } from "../../components/page-hero";
+import { SectionHeader } from "../../components/section-header";
 
 type ValueItem = {
   title: string;
@@ -25,35 +28,46 @@ export default async function NuestraFinalidadPage() {
   const purpose = messages.PurposePage;
 
   return (
-    <div className="page-stack">
+    <div className="space-y-12">
       <PageHero
         eyebrow={purpose.heroEyebrow}
         title={purpose.heroTitle}
         description={purpose.heroDescription}
       />
 
-      <section className="identity-grid">
-        <article className="identity-card">
-          <p className="eyebrow">{purpose.missionTitle}</p>
-          <h2>{purpose.missionDescription}</h2>
-        </article>
-        <article className="identity-card">
-          <p className="eyebrow">{purpose.visionTitle}</p>
-          <h2>{purpose.visionDescription}</h2>
-        </article>
+      <section className="grid gap-4 md:grid-cols-2">
+        <Card className="border-border/80 bg-card shadow-none">
+          <CardHeader className="space-y-2">
+            <p className="text-xs font-semibold tracking-[0.14em] text-primary/80 uppercase">
+              {purpose.missionTitle}
+            </p>
+            <CardTitle className="text-2xl leading-tight font-semibold tracking-tight text-foreground sm:text-3xl">
+              {purpose.missionDescription}
+            </CardTitle>
+          </CardHeader>
+        </Card>
+        <Card className="border-border/80 bg-card shadow-none">
+          <CardHeader className="space-y-2">
+            <p className="text-xs font-semibold tracking-[0.14em] text-primary/80 uppercase">
+              {purpose.visionTitle}
+            </p>
+            <CardTitle className="text-2xl leading-tight font-semibold tracking-tight text-foreground sm:text-3xl">
+              {purpose.visionDescription}
+            </CardTitle>
+          </CardHeader>
+        </Card>
       </section>
 
-      <section className="section-block">
-        <div className="section-heading">
-          <p className="eyebrow">{purpose.valuesEyebrow}</p>
-          <h2>{purpose.valuesTitle}</h2>
-        </div>
-        <div className="value-grid">
+      <section className="space-y-6">
+        <SectionHeader eyebrow={purpose.valuesEyebrow} title={purpose.valuesTitle} />
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {purpose.values.map((value) => (
-            <article key={value.title} className="pillar-card">
-              <h3>{value.title}</h3>
-              <p>{value.description}</p>
-            </article>
+            <Card key={value.title} className="border-border/80 bg-card shadow-none">
+              <CardHeader className="space-y-1.5">
+                <CardTitle className="text-2xl leading-tight text-foreground">{value.title}</CardTitle>
+                <CardDescription className="text-sm leading-relaxed">{value.description}</CardDescription>
+              </CardHeader>
+            </Card>
           ))}
         </div>
       </section>
