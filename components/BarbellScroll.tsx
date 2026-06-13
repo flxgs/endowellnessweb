@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const phases = [
@@ -20,9 +21,6 @@ const phases = [
     line: "El motor. Resultados que se sostienen por dentro.",
   },
 ];
-
-// plate heights (px) from inner to outer, one per discipline
-const PLATES = [150, 122, 96, 72];
 
 export default function BarbellScroll() {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -51,67 +49,54 @@ export default function BarbellScroll() {
     };
   }, []);
 
-  // settle phase: bar levels out during the first 12% of the scroll
-  const settle = Math.min(1, p / 0.12);
-  const rotation = -10 * (1 - settle * (2 - settle)); // ease-out to 0°
-  const phase = Math.min(phases.length - 1, Math.floor(p * 5));
-  const plateOn = (i: number) => p > 0.16 + i * 0.18;
-  const kg = Math.round(20 + 140 * Math.min(1, Math.max(0, (p - 0.12) / 0.76)));
+  // The barbell completes one full turn across the four phases, scaling up
+  // and settling into a slight 3D tilt as you arrive.
+  const intro = Math.min(1, p / 0.16);
+  const scale = 0.72 + 0.28 * (intro * (2 - intro)); // ease-out 0.72 → 1
+  const rotation = p * 360; // one full revolution tied to scroll
+  const tilt = 8 * (1 - intro); // subtle perspective that relaxes on entry
+  const phase = Math.min(phases.length - 1, Math.floor(p * phases.length));
+  const kg = Math.round(20 + 160 * Math.min(1, Math.max(0, (p - 0.12) / 0.8)));
 
   return (
-    <section ref={trackRef} className="relative h-[420vh] bg-ink" aria-label="Nuestro método">
+    <section
+      ref={trackRef}
+      className="relative h-[380vh] bg-ink"
+      aria-label="Nuestro método"
+    >
       <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden px-5">
-        <p className="text-xs font-semibold tracking-[0.3em] text-brand-light/80">
+        {/* soft brand glow behind the bar */}
+        <div
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[40vmin] w-[80vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/25 blur-[100px]"
+          aria-hidden
+        />
+
+        <p className="relative text-xs font-semibold tracking-[0.3em] text-brand-light/80">
           EL MÉTODO ENDO
         </p>
-        <h2 className="mt-3 max-w-2xl text-center text-3xl font-bold tracking-tight text-white md:text-5xl">
+        <h2 className="relative mt-3 max-w-2xl text-center text-3xl font-bold tracking-tight text-white md:text-5xl">
           Cada disciplina suma.
         </h2>
 
-        {/* Barbell */}
+        {/* Spinning barbell */}
         <div
-          className="my-14 flex items-center will-change-transform md:my-20"
-          style={{ transform: `rotate(${rotation}deg)` }}
+          className="relative my-12 w-[92vw] max-w-3xl [perspective:1200px] md:my-16"
           aria-hidden
         >
-          {/* left plates (outer → inner) */}
-          <div className="flex items-center gap-1.5">
-            {[...PLATES].reverse().map((h, idx) => {
-              const i = PLATES.length - 1 - idx;
-              return (
-                <div
-                  key={`l${i}`}
-                  className="w-3.5 rounded-md bg-gradient-to-b from-brand-light to-brand-dark transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] md:w-4"
-                  style={{
-                    height: h,
-                    opacity: plateOn(i) ? 1 : 0,
-                    transform: plateOn(i)
-                      ? "scale(1) translateX(0)"
-                      : "scale(0.4) translateX(-40px)",
-                  }}
-                />
-              );
-            })}
-          </div>
-          {/* sleeve + bar + sleeve */}
-          <div className="h-4 w-5 rounded-sm bg-zinc-400 md:w-7" />
-          <div className="h-2.5 w-36 rounded-full bg-zinc-200 sm:w-52 md:w-72" />
-          <div className="h-4 w-5 rounded-sm bg-zinc-400 md:w-7" />
-          {/* right plates (inner → outer) */}
-          <div className="flex items-center gap-1.5">
-            {PLATES.map((h, i) => (
-              <div
-                key={`r${i}`}
-                className="w-3.5 rounded-md bg-gradient-to-b from-brand-light to-brand-dark transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] md:w-4"
-                style={{
-                  height: h,
-                  opacity: plateOn(i) ? 1 : 0,
-                  transform: plateOn(i)
-                    ? "scale(1) translateX(0)"
-                    : "scale(0.4) translateX(40px)",
-                }}
-              />
-            ))}
+          <div
+            className="relative aspect-[2442/541] w-full will-change-transform"
+            style={{
+              transform: `rotateX(${tilt}deg) rotate(${rotation}deg) scale(${scale})`,
+            }}
+          >
+            <Image
+              src="/brand/barbell.png"
+              alt=""
+              fill
+              sizes="(min-width: 768px) 768px, 92vw"
+              className="object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.55)]"
+              priority
+            />
           </div>
         </div>
 
@@ -136,14 +121,14 @@ export default function BarbellScroll() {
           ))}
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="relative flex items-center gap-6">
           <p className="font-mono text-sm tabular-nums text-brand-light">
             {kg} kg
           </p>
           <div className="flex gap-2">
-            {phases.map((_, i) => (
+            {phases.map((ph, i) => (
               <span
-                key={i}
+                key={ph.name}
                 className={`h-1.5 rounded-full transition-all duration-500 ${
                   phase >= i ? "w-7 bg-brand-light" : "w-1.5 bg-white/20"
                 }`}
