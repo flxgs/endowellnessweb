@@ -58,7 +58,7 @@ export default function Navbar() {
           <li>
             <a
               href={whatsappHref()}
-              className="shimmer rounded-full bg-brand px-5 py-2.5 text-[0.92rem] font-semibold text-white transition-all hover:bg-brand-dark hover:shadow-lg hover:shadow-brand/25"
+              className="rounded-full bg-brand px-5 py-2.5 text-[0.92rem] font-semibold text-white transition-all hover:bg-brand-dark hover:shadow-lg hover:shadow-brand/25"
             >
               Reserva tu valoración
             </a>
@@ -104,7 +104,7 @@ export default function Navbar() {
             <li className="pt-2 pb-1">
               <a
                 href={whatsappHref()}
-                className="shimmer block rounded-full bg-brand px-5 py-3 text-center font-semibold text-white"
+                className="block rounded-full bg-brand px-5 py-3 text-center font-semibold text-white"
               >
                 Reserva tu valoración
               </a>
