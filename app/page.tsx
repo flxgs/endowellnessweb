@@ -46,7 +46,7 @@ export default function Home() {
         <Reveal delay={340} className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
           <a
             href={whatsappHref()}
-            className="rounded-full bg-brand px-8 py-4 font-semibold text-white shadow-lg shadow-brand/25 transition-all hover:scale-[1.03] hover:bg-brand-dark"
+            className="shimmer rounded-full bg-brand px-8 py-4 font-semibold text-white shadow-lg shadow-brand/25 transition-all hover:scale-[1.03] hover:bg-brand-dark"
           >
             Reserva tu valoración inicial
           </a>

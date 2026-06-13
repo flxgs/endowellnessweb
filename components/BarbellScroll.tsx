@@ -22,6 +22,9 @@ const phases = [
   },
 ];
 
+// frame0 = empty bar, frame4 = fully loaded. One plate pair added per phase.
+const FRAMES = [0, 1, 2, 3, 4];
+
 export default function BarbellScroll() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [p, setP] = useState(0);
@@ -49,25 +52,24 @@ export default function BarbellScroll() {
     };
   }, []);
 
-  // The barbell completes one full turn across the four phases, scaling up
-  // and settling into a slight 3D tilt as you arrive.
-  const intro = Math.min(1, p / 0.16);
-  const scale = 0.72 + 0.28 * (intro * (2 - intro)); // ease-out 0.72 → 1
-  const rotation = p * 360; // one full revolution tied to scroll
-  const tilt = 8 * (1 - intro); // subtle perspective that relaxes on entry
-  const phase = Math.min(phases.length - 1, Math.floor(p * phases.length));
-  const kg = Math.round(20 + 160 * Math.min(1, Math.max(0, (p - 0.12) / 0.8)));
+  // load progresses across the four disciplines: 0 plates → 4 plates
+  const loaded = Math.min(1, Math.max(0, (p - 0.06) / 0.84)) * 4; // 0 → 4
+  const phase = Math.min(phases.length - 1, Math.floor(loaded));
+  const kg = Math.round(20 + loaded * 40); // 20 kg bar → 180 kg loaded
+  // subtle settle-in
+  const intro = Math.min(1, p / 0.12);
+  const scale = 0.9 + 0.1 * (intro * (2 - intro));
 
   return (
     <section
       ref={trackRef}
-      className="relative h-[380vh] bg-ink"
+      className="relative h-[420vh] bg-ink"
       aria-label="Nuestro método"
     >
       <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden px-5">
         {/* soft brand glow behind the bar */}
         <div
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[40vmin] w-[80vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/25 blur-[100px]"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[36vmin] w-[78vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/25 blur-[110px]"
           aria-hidden
         />
 
@@ -75,28 +77,32 @@ export default function BarbellScroll() {
           EL MÉTODO ENDO
         </p>
         <h2 className="relative mt-3 max-w-2xl text-center text-3xl font-bold tracking-tight text-white md:text-5xl">
-          Cada disciplina suma.
+          Cada disciplina suma peso.
         </h2>
 
-        {/* Spinning barbell */}
+        {/* Loading barbell — frames crossfade as weight is added */}
         <div
-          className="relative my-12 w-[92vw] max-w-3xl [perspective:1200px] md:my-16"
+          className="relative my-12 w-[94vw] max-w-3xl will-change-transform md:my-16"
+          style={{ transform: `scale(${scale})` }}
           aria-hidden
         >
-          <div
-            className="relative aspect-[2442/541] w-full will-change-transform"
-            style={{
-              transform: `rotateX(${tilt}deg) rotate(${rotation}deg) scale(${scale})`,
-            }}
-          >
-            <Image
-              src="/brand/barbell.png"
-              alt=""
-              fill
-              sizes="(min-width: 768px) 768px, 92vw"
-              className="object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.55)]"
-              priority
-            />
+          <div className="relative aspect-[2444/559] w-full">
+            {FRAMES.map((f) => {
+              // each frame fully opaque at its index, crossfading to neighbours
+              const opacity = Math.max(0, 1 - Math.abs(loaded - f));
+              return (
+                <Image
+                  key={f}
+                  src={`/brand/barbell/frame${f}.png`}
+                  alt=""
+                  fill
+                  sizes="(min-width: 768px) 768px, 94vw"
+                  priority={f === 0}
+                  className="object-contain drop-shadow-[0_28px_45px_rgba(0,0,0,0.5)]"
+                  style={{ opacity }}
+                />
+              );
+            })}
           </div>
         </div>
 
