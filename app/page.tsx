@@ -28,12 +28,12 @@ export default function Home() {
           </p>
         </Reveal>
         <Reveal delay={100}>
-          <h1 className="mt-6 max-w-4xl text-balance text-5xl font-bold leading-[1.04] tracking-tight md:text-7xl">
-            Tu salud no es una parcela.
+          <h1 className="mt-6 max-w-4xl text-balance text-5xl font-normal leading-[1.04] tracking-tight md:text-7xl">
+            Tu salud. Tu rendimiento.
             <br />
-            <span className="bg-gradient-to-r from-brand-light to-brand-dark bg-clip-text text-transparent">
-              Es tu hogar.
-            </span>
+            <strong className="bg-gradient-to-r from-brand-light to-brand-dark bg-clip-text font-bold text-transparent">
+              Tu bienestar
+            </strong>
           </h1>
         </Reveal>
         <Reveal delay={220}>
