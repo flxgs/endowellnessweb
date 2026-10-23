@@ -1,3 +1,5 @@
+import { pageMetadata, business } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,8 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = services.find((s) => s.slug === slug);
   if (!service) return {};
   return {
-    title: service.name,
-    description: service.intro,
+    ...pageMetadata(service.name, service.intro, `/servicios/${service.slug}`, service.image),
     // Las pestañas ocultas no deben indexarse todavía
     robots: service.hidden ? { index: false, follow: false } : undefined,
   };
@@ -33,12 +34,13 @@ export default async function ServicioPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", name: service.name, description: service.intro, url: `${business.url}/servicios/${service.slug}`, image: `${business.url}${service.image}`, provider: business, areaServed: "Bétera" }} />
       <section className="relative flex min-h-[60vh] items-end overflow-hidden">
         <Image
           src={service.image}
           alt={service.name}
           fill
-          priority
+          preload
           sizes="100vw"
           className="object-cover"
         />

@@ -1,13 +1,12 @@
 export const site = {
   name: "ENDO Wellness Club",
   domain: "endowellnessclub.es",
-  email: "info@endowellnessclub.es",
+  email: "endowellnessclub@gmail.com",
   address: "C/ Trinquet 4, 46117 Bétera (Valencia)",
   mapsQuery: "C/ Trinquet 4, 46117 Bétera, Valencia, España",
-  // Pendientes de alta — se mostrarán cuando existan
-  whatsapp: "", // ej. "34600000000" (sin "+")
-  phone: "",
-  instagram: "",
+  whatsapp: "34601858852",
+  phone: "+34601858852",
+  instagram: "https://www.instagram.com/endowellness.club/",
 };
 
 export function whatsappHref() {
@@ -17,11 +16,7 @@ export function whatsappHref() {
 }
 
 export const departmentEmails = [
-  { area: "Información general", email: "info@endowellnessclub.es" },
-  { area: "Entrenamiento", email: "entrenamiento@endowellnessclub.es" },
-  { area: "Nutrición", email: "nutricion@endowellnessclub.es" },
-  { area: "Fisioterapia", email: "fisioterapia@endowellnessclub.es" },
-  { area: "Psicología", email: "psicologia@endowellnessclub.es" },
+  { area: "Información y reservas", email: site.email },
 ];
 
 /* ---------------------------------- Equipo --------------------------------- */
@@ -118,7 +113,7 @@ export const services: Service[] = [
     tagline: "Fuerza con propósito",
     intro:
       "Desde tu primera sesión hasta el alto rendimiento: programas individualizados y grupos reducidos con supervisión técnica constante.",
-    image: "/photos/entrenamiento.jpg",
+    image: "/photos/club/dsc00116.webp",
     items: [
       {
         title: "Entrenamiento personal (1 a 1)",
@@ -158,7 +153,7 @@ export const services: Service[] = [
     tagline: "Comer bien, vivir mejor",
     intro:
       "Alimentación real, sostenible y basada en evidencia científica. Sin dietas milagro: planes 100 % personalizados a tu vida y a tu objetivo.",
-    image: "/photos/nutricion.jpg",
+    image: "/photos/club/dsc00019.webp",
     items: [
       {
         title: "Nutrición deportiva",
@@ -207,7 +202,7 @@ export const services: Service[] = [
     tagline: "Más allá de la lesión",
     intro:
       "Diagnóstico preciso, tratamiento basado en evidencia y un objetivo claro: que vuelvas a moverte sin miedo y sin depender de la camilla.",
-    image: "/photos/fisioterapia.jpg",
+    image: "/photos/club/dsc00069.webp",
     items: [
       {
         title: "Fisioterapia musculoesquelética",
@@ -257,7 +252,7 @@ export const services: Service[] = [
     tagline: "El cambio empieza dentro",
     intro:
       "Porque el cambio no es solo físico: motivación, relación con la comida, estrés y adherencia al proceso. La pieza que hace que los resultados duren.",
-    image: "/photos/psicologia.jpg",
+    image: "/photos/club/dsc00019.webp",
     items: [
       {
         title: "Gestión emocional y estrés",
@@ -297,8 +292,7 @@ export const services: Service[] = [
     tagline: "Salud desde la base",
     intro:
       "Del estudio biomecánico de la pisada al cuidado integral del pie: prevención, tecnología y tratamiento experto.",
-    image: "/photos/hero-gym.jpg",
-    hidden: true,
+    image: "/photos/club/dsc00042.webp",
     items: [
       {
         title: "Estudio biomecánico de la pisada",
@@ -325,6 +319,30 @@ export const services: Service[] = [
         description:
           "Vigilamos el crecimiento de los más pequeños para asegurar que sus pies se desarrollen correctamente y evitar problemas en el futuro.",
       },
+    ],
+  },
+  {
+    slug: "barre",
+    name: "Barre",
+    tagline: "Fuerza, equilibrio y control",
+    intro: "Un espacio para trabajar la fuerza, la postura y el control del movimiento con ejercicios en barra.",
+    image: "/photos/club/dsc00066.webp",
+    items: [
+      { title: "Trabajo en barra", description: "Ejercicios de fuerza y equilibrio con el apoyo de la barra." },
+      { title: "Control del movimiento", description: "Un trabajo centrado en la coordinación, la postura y la precisión de cada ejercicio." },
+      { title: "Consulta las clases", description: "Escríbenos para conocer los horarios, los grupos y la disponibilidad." },
+    ],
+  },
+  {
+    slug: "pilates",
+    name: "Pilates",
+    tagline: "Movimiento consciente",
+    intro: "Trabaja la movilidad, la fuerza y el control corporal a través del movimiento consciente y la respiración.",
+    image: "/photos/club/dsc00063.webp",
+    items: [
+      { title: "Control y respiración", description: "Ejercicios que conectan la respiración con un movimiento preciso y controlado." },
+      { title: "Fuerza y movilidad", description: "Trabajo corporal centrado en la estabilidad, la coordinación y la movilidad." },
+      { title: "Encuentra tu sesión", description: "Consulta con el equipo la modalidad, los horarios y la disponibilidad antes de reservar." },
     ],
   },
   {
@@ -542,7 +560,7 @@ export const posts: Post[] = [
       "La masa muscular es el seguro de vida más barato que existe. Te contamos por qué la fuerza debería ser la base de tu entrenamiento, tengas la edad que tengas.",
     date: "2026-05-28",
     readingMinutes: 5,
-    image: "/photos/entrenamiento.jpg",
+    image: "/photos/club/dsc00116.webp",
     body: [
       "Durante décadas, el entrenamiento de fuerza se asoció únicamente a la estética o al deporte de competición. Hoy la evidencia científica es contundente: la fuerza es uno de los mejores predictores de salud y longevidad que conocemos.",
       "A partir de los 30 años perdemos entre un 3 % y un 8 % de masa muscular por década si no hacemos nada por evitarlo. Esa pérdida — la sarcopenia — está detrás de muchas caídas, fracturas y pérdidas de autonomía en edades avanzadas. La buena noticia: es reversible a cualquier edad.",
@@ -559,7 +577,7 @@ export const posts: Post[] = [
       "Cada año aparece una dieta nueva que promete resultados rápidos. Y cada año, la ciencia repite lo mismo: lo que funciona es lo sostenible.",
     date: "2026-05-14",
     readingMinutes: 4,
-    image: "/photos/nutricion.jpg",
+    image: "/photos/club/dsc00019.webp",
     body: [
       "Si una dieta te promete perder mucho peso en poco tiempo, ya sabes cómo acaba: recuperándolo. Las restricciones extremas son insostenibles, generan ansiedad y deterioran tu relación con la comida.",
       "El enfoque que defendemos es más sencillo — y más exigente a la vez: alimentación real, basada en evidencia, ajustada a tu contexto. Verduras, frutas, proteína de calidad, legumbres, cereales integrales y grasas saludables como base; flexibilidad y disfrute como norma.",
@@ -576,7 +594,7 @@ export const posts: Post[] = [
       "El reposo absoluto está sobrevalorado y el movimiento es, casi siempre, parte de la solución. Hablamos de dolor, lesiones y recuperación activa.",
     date: "2026-04-30",
     readingMinutes: 5,
-    image: "/photos/fisioterapia.jpg",
+    image: "/photos/club/dsc00069.webp",
     body: [
       "Una de las ideas más dañinas que arrastramos sobre las lesiones es que el dolor equivale a daño y que la solución es dejar de moverse. La neurociencia del dolor nos dice otra cosa: el dolor es una alarma, y esa alarma puede sonar más fuerte o más floja por factores que no son solo el tejido — el estrés, el sueño, el miedo al movimiento.",
       "Por eso la fisioterapia moderna combina el tratamiento en camilla con algo igual de importante: la educación y el ejercicio terapéutico. Entender qué te pasa reduce el miedo; moverte de forma progresiva y guiada recupera la función.",
@@ -593,7 +611,7 @@ export const posts: Post[] = [
       "Motivación, adherencia, gestión del estrés y relación con la comida: el trabajo psicológico es lo que convierte un plan en un estilo de vida.",
     date: "2026-04-15",
     readingMinutes: 4,
-    image: "/photos/psicologia.jpg",
+    image: "/photos/club/dsc00019.webp",
     body: [
       "Casi nadie abandona un proceso de cambio por falta de información. Se abandona por falta de adherencia: la vida aprieta, la motivación cae y el plan — perfecto sobre el papel — se vuelve insostenible.",
       "Ahí es donde entra la psicología. No como recurso de emergencia, sino como parte del sistema desde el primer día. Trabajar la gestión del estrés, las expectativas y la autoexigencia convierte los objetivos en hábitos que sobreviven a las malas semanas.",

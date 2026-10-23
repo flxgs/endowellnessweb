@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LogoLockup } from "./Logo";
-import { site, departmentEmails, visibleServices } from "@/lib/content";
+import { site, visibleServices } from "@/lib/content";
 
 export default function Footer() {
   return (
@@ -10,7 +10,7 @@ export default function Footer() {
           <LogoLockup dark />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/65">
             Tu salud no es una parcela, es tu hogar. Entrenamiento, nutrición,
-            fisioterapia y psicología bajo un mismo techo en Bétera.
+            fisioterapia, psicología, podología, barre y pilates en Bétera.
           </p>
         </div>
 
@@ -65,21 +65,14 @@ export default function Footer() {
             <li>
               <a
                 href={`mailto:${site.email}`}
-                className="transition-colors hover:text-white"
+                data-contact-id="footer-email"
+                className="break-words transition-colors hover:text-white"
               >
                 {site.email}
               </a>
             </li>
-            {departmentEmails.slice(1).map((d) => (
-              <li key={d.email}>
-                <a
-                  href={`mailto:${d.email}`}
-                  className="text-white/60 transition-colors hover:text-white"
-                >
-                  {d.email}
-                </a>
-              </li>
-            ))}
+            <li><a href={`tel:${site.phone}`} data-contact-id="footer-phone" className="hover:text-white">+34 601 85 88 52</a></li>
+            <li><a href={site.instagram} data-contact-id="footer-instagram" target="_blank" rel="noopener noreferrer" className="hover:text-white">@endowellness.club</a></li>
           </ul>
         </div>
       </div>

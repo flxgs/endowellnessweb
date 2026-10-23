@@ -32,7 +32,7 @@ export default function NuestraFinalidadPage() {
       <section className="px-5 pb-20">
         <ScrollScale className="relative mx-auto aspect-[16/8] max-w-6xl rounded-[2rem]">
           <Image
-            src="/photos/cafe.jpg"
+            src="/photos/club/dsc09994.webp"
             alt="Zona social y cafetería del club"
             fill
             sizes="(min-width: 1152px) 1152px, 100vw"

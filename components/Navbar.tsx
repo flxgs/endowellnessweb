@@ -17,8 +17,9 @@ const links = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [openPath, setOpenPath] = useState<string | null>(null);
   const pathname = usePathname();
+  const open = openPath === pathname;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -27,7 +28,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => setOpen(false), [pathname]);
 
   return (
     <header
@@ -58,15 +58,16 @@ export default function Navbar() {
           <li>
             <a
               href={whatsappHref()}
+            data-contact-id="components-Navbar-whatsapp-1"
               className="rounded-full bg-brand px-5 py-2.5 text-[0.92rem] font-semibold text-white transition-all hover:bg-brand-dark hover:shadow-lg hover:shadow-brand/25"
             >
-              Reserva tu valoración
+              Habla con nosotros
             </a>
           </li>
         </ul>
 
         <button
-          onClick={() => setOpen(!open)}
+          onClick={() => setOpenPath(open ? null : pathname)}
           className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
@@ -85,6 +86,7 @@ export default function Navbar() {
       </nav>
 
       <div
+        inert={!open}
         className={`grid overflow-hidden transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] lg:hidden ${
           open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         }`}
@@ -95,6 +97,7 @@ export default function Navbar() {
               <li key={l.href}>
                 <Link
                   href={l.href}
+                  onClick={() => setOpenPath(null)}
                   className="block rounded-lg px-3 py-2.5 text-lg font-medium text-ink hover:bg-mist"
                 >
                   {l.label}
@@ -104,9 +107,10 @@ export default function Navbar() {
             <li className="pt-2 pb-1">
               <a
                 href={whatsappHref()}
+            data-contact-id="components-Navbar-whatsapp-2"
                 className="block rounded-full bg-brand px-5 py-3 text-center font-semibold text-white"
               >
-                Reserva tu valoración
+                Habla con nosotros
               </a>
             </li>
           </ul>

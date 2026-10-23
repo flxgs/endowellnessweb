@@ -3,51 +3,51 @@ import Reveal from "./Reveal";
 
 const shots = [
   {
-    src: "/photos/hero-gym.jpg",
+    src: "/photos/club/dsc00116.webp",
     alt: "Sala principal de entrenamiento",
     caption: "Sala principal",
     span: "md:col-span-4 md:row-span-2",
   },
   {
-    src: "/photos/pesas.jpg",
+    src: "/photos/club/dsc00134.webp",
     alt: "Zona de peso libre con mancuernas",
     caption: "Peso libre",
     span: "md:col-span-2",
   },
   {
-    src: "/photos/cafe.jpg",
+    src: "/photos/club/dsc09994.webp",
     alt: "Cafetería y zona social",
     caption: "Zona social y cafetería",
     span: "md:col-span-2",
   },
   {
-    src: "/photos/barra.jpg",
-    alt: "Plataforma de halterofilia",
-    caption: "Plataformas",
+    src: "/photos/club/dsc00087.webp",
+    alt: "Estructura de entrenamiento de fuerza",
+    caption: "Entrenamiento de fuerza",
     span: "md:col-span-2",
   },
   {
-    src: "/photos/fisioterapia.jpg",
+    src: "/photos/club/dsc00069.webp",
     alt: "Consulta de fisioterapia",
     caption: "Consultas",
     span: "md:col-span-2",
   },
   {
-    src: "/photos/fuerza.jpg",
+    src: "/photos/club/dsc00126.webp",
     alt: "Zona funcional de fuerza",
     caption: "Zona funcional",
     span: "md:col-span-2",
   },
   {
-    src: "/photos/mancuernas.jpg",
-    alt: "Detalle de la fila de mancuernas",
-    caption: "El detalle importa",
+    src: "/photos/club/dsc00042.webp",
+    alt: "Consulta de podología",
+    caption: "Podología",
     span: "md:col-span-2",
   },
   {
-    src: "/photos/grupal.jpg",
-    alt: "Sala de clases en grupos reducidos",
-    caption: "Grupos reducidos · máx. 6",
+    src: "/photos/club/dsc00066.webp",
+    alt: "Sala de movimiento con barras y espejos",
+    caption: "Sala de movimiento",
     span: "md:col-span-4",
   },
 ];
@@ -79,7 +79,7 @@ export default function Gallery() {
               src={s.src}
               alt={s.alt}
               fill
-              sizes="(min-width: 768px) 33vw, 100vw"
+              sizes={s.span.includes("col-span-4") ? "(min-width: 1152px) 740px, (min-width: 768px) 67vw, 100vw" : "(min-width: 1152px) 370px, (min-width: 768px) 33vw, 100vw"}
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/60 via-transparent to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />

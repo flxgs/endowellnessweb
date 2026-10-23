@@ -1,3 +1,5 @@
+import { pageMetadata, business } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
@@ -8,14 +10,16 @@ import CTA from "@/components/CTA";
 import {
   visibleServices,
   team,
-  reviews,
   purpose,
   whatsappHref,
 } from "@/lib/content";
 
+export const metadata = pageMetadata("ENDO Wellness Club — Salud integral en Bétera", "Entrenamiento, nutrición, fisioterapia, psicología, podología, barre y pilates en Bétera. Descubre el club y habla con nosotros por WhatsApp.", "/");
+
 export default function Home() {
   return (
     <>
+      <JsonLd data={{ "@context": "https://schema.org", ...business }} />
       {/* ------------------------------- Hero ------------------------------- */}
       <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 pt-24 pb-16 text-center">
         <div
@@ -38,17 +42,18 @@ export default function Home() {
         </Reveal>
         <Reveal delay={220}>
           <p className="mt-7 max-w-xl text-pretty text-lg leading-relaxed text-ink-soft">
-            Entrenamiento, nutrición, fisioterapia y psicología trabajando como
-            un solo equipo, bajo un mismo techo. Bienvenido a tu club de salud
+            Entrenamiento, nutrición, fisioterapia, psicología y podología,
+            junto a clases de barre y pilates, bajo un mismo techo. Bienvenido a tu club de salud
             integral.
           </p>
         </Reveal>
         <Reveal delay={340} className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
           <a
             href={whatsappHref()}
+            data-contact-id="app-page-whatsapp-1"
             className="shimmer rounded-full bg-brand px-8 py-4 font-semibold text-white shadow-lg shadow-brand/25 transition-all hover:scale-[1.03] hover:bg-brand-dark"
           >
-            Reserva tu valoración inicial
+            Habla con nosotros
           </a>
           <Link
             href="/servicios"
@@ -68,10 +73,10 @@ export default function Home() {
       <section className="px-5 pb-10">
         <ScrollScale className="relative mx-auto aspect-[16/9] max-w-6xl rounded-[2rem] shadow-2xl shadow-brand-deep/15">
           <Image
-            src="/photos/hero-gym.jpg"
+            src="/photos/club/dsc00116.webp"
             alt="Sala de entrenamiento de ENDO Wellness Club"
             fill
-            priority
+            preload
             sizes="(min-width: 1152px) 1152px, 100vw"
             className="object-cover"
           />
@@ -100,7 +105,7 @@ export default function Home() {
             </Reveal>
             <Reveal delay={240} className="mt-8 grid grid-cols-3 gap-6">
               {[
-                ["4", "disciplinas coordinadas"],
+                [String(visibleServices.length), "servicios para cuidarte"],
                 ["6", "personas máx. por grupo"],
                 ["0", "permanencia"],
               ].map(([n, label]) => (
@@ -206,38 +211,6 @@ export default function Home() {
               Conoce al equipo completo →
             </Link>
           </Reveal>
-        </div>
-      </section>
-
-      {/* ------------------------------ Reseñas ----------------------------- */}
-      <section className="mx-auto max-w-6xl px-5 py-24">
-        <Reveal>
-          <p className="text-xs font-semibold tracking-[0.3em] text-brand">
-            OPINIONES
-          </p>
-          <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight md:text-5xl">
-            Lo que dicen de nosotros.
-          </h2>
-        </Reveal>
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {reviews.map((r, i) => (
-            <Reveal
-              key={r.name}
-              delay={i * 110}
-              className="rounded-3xl border border-line bg-white p-7 shadow-sm"
-            >
-              <div className="flex gap-1 text-brand-light" aria-label={`${r.stars} estrellas`}>
-                {Array.from({ length: r.stars }).map((_, s) => (
-                  <svg key={s} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                    <path d="M12 2l2.9 6.26L21.5 9.27l-4.75 4.87L17.8 21 12 17.77 6.2 21l1.05-6.86L2.5 9.27l6.6-1.01z" />
-                  </svg>
-                ))}
-              </div>
-              <p className="mt-4 leading-relaxed text-ink-soft">“{r.text}”</p>
-              <p className="mt-5 text-sm font-semibold text-ink">{r.name}</p>
-              <p className="text-xs text-ink-soft/70">Reseña de Google</p>
-            </Reveal>
-          ))}
         </div>
       </section>
 

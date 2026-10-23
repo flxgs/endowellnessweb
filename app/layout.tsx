@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s · ENDO Wellness Club",
   },
   description:
-    "Entrenamiento, nutrición, fisioterapia y psicología bajo un mismo techo. Centro de salud integral en Bétera (Valencia). Tu salud no es una parcela, es tu hogar.",
+    "Entrenamiento, nutrición, fisioterapia, psicología, podología, barre y pilates bajo un mismo techo. Centro de salud integral en Bétera (Valencia). Tu salud no es una parcela, es tu hogar.",
   openGraph: {
     siteName: "ENDO Wellness Club",
     locale: "es_ES",

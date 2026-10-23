@@ -1,26 +1,24 @@
-import type { Metadata } from "next";
+import { pageMetadata, business } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import CTA from "@/components/CTA";
 import { visibleServices } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Servicios",
-  description:
-    "Entrenamiento, nutrición, fisioterapia y psicología: cuatro disciplinas coordinadas para cuidar de tu salud de forma integral.",
-};
+export const metadata = pageMetadata("Servicios", "Entrenamiento, nutrición, fisioterapia, psicología, podología, barre y pilates en Bétera. Conoce los servicios de ENDO Wellness Club.", "/servicios");
 
 export default function ServiciosPage() {
   return (
     <>
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", itemListElement: visibleServices.map((service, index) => ({ "@type": "ListItem", position: index + 1, name: service.name, url: `${business.url}/servicios/${service.slug}` })) }} />
       <section className="mx-auto max-w-6xl px-5 pt-36 pb-16 md:pt-44">
         <Reveal>
           <p className="text-xs font-semibold tracking-[0.3em] text-brand">
             SERVICIOS
           </p>
           <h1 className="mt-4 max-w-3xl text-balance text-4xl font-bold tracking-tight md:text-6xl">
-            Cuatro disciplinas. Un solo equipo.
+            Siete servicios. Un solo equipo.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
             En tu primera visita realizamos una valoración inicial y te

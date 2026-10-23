@@ -2,7 +2,7 @@ import Reveal from "./Reveal";
 import { whatsappHref, site } from "@/lib/content";
 
 export default function CTA({
-  title = "Empieza con una valoración inicial",
+  title = "Hablemos de lo que necesitas",
   text = "Cuéntanos tu punto de partida y tu objetivo. Nosotros te recomendamos el camino más eficiente — sin permanencia y pagando solo por lo que necesitas.",
 }: {
   title?: string;
@@ -18,13 +18,15 @@ export default function CTA({
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             href={whatsappHref()}
+            data-contact-id="components-CTA-whatsapp-1"
             className="rounded-full bg-white px-7 py-3.5 font-semibold text-brand-dark transition-transform hover:scale-[1.03]"
           >
-            Escríbenos ahora
+            Habla con nosotros por WhatsApp
           </a>
           <a
             href={`mailto:${site.email}`}
-            className="rounded-full border border-white/30 px-7 py-3.5 font-semibold text-white transition-colors hover:bg-white/10"
+                data-contact-id="cta-email"
+            className="max-w-full break-all rounded-full border border-white/30 px-7 py-3.5 font-semibold text-white transition-colors hover:bg-white/10"
           >
             {site.email}
           </a>
